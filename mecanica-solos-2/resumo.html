@@ -1,0 +1,1060 @@
+<title>Resumão Mec Solos II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' },
+    options: { enableMenu: false }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" async></script>
+<style>
+  :root {
+    --bg: #f3f4f1;
+    --surface: #ffffff;
+    --ink: #1c2126;
+    --muted: #5a6470;
+    --line: #d7dbd5;
+    --accent: #2c5b7a;
+    --accent-soft: #e3ecf2;
+    --sand: #a5761f;
+    --sand-soft: #f6eedd;
+    --warn: #ad4430;
+    --warn-soft: #f7e6e1;
+    --ok: #3d7a4f;
+    --strata-1: #c9b58a;
+    --strata-2: #d8c27c;
+    --strata-3: #7f8b95;
+    --strata-4: #4b5258;
+    --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #121619;
+      --surface: #1a2024;
+      --ink: #e5e8ea;
+      --muted: #9aa5ae;
+      --line: #2d353b;
+      --accent: #86b6d8;
+      --accent-soft: #1d2d38;
+      --sand: #d9ad56;
+      --sand-soft: #2b2518;
+      --warn: #e4836c;
+      --warn-soft: #34201b;
+      --ok: #7cc293;
+      --strata-1: #8e7d58;
+      --strata-2: #a38f4f;
+      --strata-3: #58636c;
+      --strata-4: #353b40;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #121619;
+    --surface: #1a2024;
+    --ink: #e5e8ea;
+    --muted: #9aa5ae;
+    --line: #2d353b;
+    --accent: #86b6d8;
+    --accent-soft: #1d2d38;
+    --sand: #d9ad56;
+    --sand-soft: #2b2518;
+    --warn: #e4836c;
+    --warn-soft: #34201b;
+    --ok: #7cc293;
+    --strata-1: #8e7d58;
+    --strata-2: #a38f4f;
+    --strata-3: #58636c;
+    --strata-4: #353b40;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    padding-inline: 18px;
+    padding-block: 0 64px;
+  }
+  .wrap { max-width: 860px; margin-inline: auto; }
+
+  /* Cabeçalho */
+  header.top { padding-block: 36px 20px; display: grid; gap: 10px; }
+  .eyebrow {
+    font-family: var(--font-display);
+    font-stretch: 85%;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-stretch: 78%;
+    font-weight: 800;
+    font-size: clamp(34px, 7vw, 52px);
+    line-height: 1.02;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .lede { margin: 0; color: var(--muted); max-width: 62ch; }
+  .strata { display: grid; grid-template-columns: 1fr 2fr 3fr 1fr; height: 8px; border-radius: 2px; overflow: hidden; margin-top: 8px; }
+  .strata span:nth-child(1) { background: var(--strata-1); }
+  .strata span:nth-child(2) { background: var(--strata-2); }
+  .strata span:nth-child(3) { background: var(--strata-3); }
+  .strata span:nth-child(4) { background: var(--strata-4); }
+  .strata-legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; color: var(--muted); font-family: var(--font-mono); }
+
+  /* Navegação */
+  nav.toc {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    margin-inline: -18px;
+    padding: 10px 18px;
+  }
+  nav.toc ul { list-style: none; margin: 0 auto; padding: 0; display: flex; gap: 8px; overflow-x: auto; max-width: 860px; scrollbar-width: thin; }
+  nav.toc a {
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-stretch: 85%;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 5px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+  }
+  nav.toc a:hover { border-color: var(--accent); color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Seções */
+  section { padding-block: 34px 6px; scroll-margin-top: 64px; }
+  h2 {
+    font-family: var(--font-display);
+    font-stretch: 80%;
+    font-weight: 800;
+    font-size: clamp(26px, 5vw, 34px);
+    line-height: 1.1;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  h2 .cap { display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-stretch: 90%; margin-bottom: 4px; }
+  h3 {
+    font-family: var(--font-display);
+    font-stretch: 88%;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 26px 0 8px;
+    text-wrap: balance;
+  }
+  p { margin: 0 0 12px; max-width: 68ch; }
+  ul, ol { margin: 0 0 14px; padding-left: 22px; max-width: 70ch; }
+  li { margin-bottom: 5px; }
+  strong { font-weight: 700; }
+  .muted { color: var(--muted); }
+  .mono { font-family: var(--font-mono); font-size: 0.92em; }
+
+  /* Fórmulas */
+  .eq {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 0 14px;
+    overflow-x: auto;
+  }
+  .eq.key { border-color: var(--sand); background: var(--sand-soft); }
+  .eq .lbl {
+    display: block;
+    font-family: var(--font-display);
+    font-stretch: 85%;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 2px;
+  }
+  .eq p { margin: 4px 0; }
+  mjx-container[display="true"] { margin: 6px 0 !important; overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+
+  .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 12px 0 16px; }
+  .case { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; gap: 4px; align-content: start; }
+  .case h4 { margin: 0; font-family: var(--font-display); font-stretch: 88%; font-size: 16px; font-weight: 700; }
+  .case .when { font-size: 14px; color: var(--muted); margin: 0; }
+
+  /* Tabelas */
+  .table-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  th { font-family: var(--font-display); font-stretch: 88%; font-weight: 700; font-size: 14px; color: var(--muted); background: var(--bg); white-space: nowrap; }
+  td.num, th.num { text-align: right; font-family: var(--font-mono); font-size: 14px; }
+  table.map td:first-child { width: 58%; }
+  table.map td:first-child div { margin-top: 4px; }
+
+  .pri { display: inline-block; font-family: var(--font-display); font-stretch: 85%; font-weight: 700; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+  .pri.max { background: var(--warn-soft); color: var(--warn); }
+  .pri.alta { background: var(--sand-soft); color: var(--sand); }
+  .pri.media { background: var(--accent-soft); color: var(--accent); }
+  .pri.baixa { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+
+  /* Roteiro */
+  ol.steps { list-style: none; padding: 0; counter-reset: s; display: grid; gap: 10px; max-width: none; }
+  ol.steps li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; margin: 0; }
+  ol.steps li::before {
+    content: counter(s);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 15px;
+    width: 30px; height: 30px;
+    display: grid; place-items: center;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50%;
+  }
+  ol.steps li div { padding-top: 2px; }
+
+  /* Avisos */
+  .trap { background: var(--warn-soft); border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent); border-radius: 6px; padding: 12px 16px; margin: 12px 0 16px; }
+  .trap .lbl { font-family: var(--font-display); font-stretch: 85%; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warn); display: block; margin-bottom: 4px; }
+  .trap p:last-child, .trap ul:last-child { margin-bottom: 0; }
+  .tip { background: var(--accent-soft); border-radius: 6px; padding: 12px 16px; margin: 12px 0 16px; }
+  .tip .lbl { font-family: var(--font-display); font-stretch: 85%; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 4px; }
+  .tip p:last-child, .tip ul:last-child { margin-bottom: 0; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; padding: 0; list-style: none; max-width: none; }
+  .chips li { margin: 0; font-family: var(--font-mono); font-size: 13.5px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 4px 9px; }
+
+  /* Diagrama */
+  figure { margin: 14px 0 18px; }
+  .diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px; overflow-x: auto; }
+  .diagram svg { display: block; width: 100%; height: auto; }
+  .diagram .ax { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+  .diagram .curve { stroke: var(--accent); stroke-width: 3; fill: none; }
+  .diagram .ext { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 5 5; fill: none; opacity: 0.7; }
+  .diagram .guide { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; fill: none; }
+  .diagram .unload { stroke: var(--sand); stroke-width: 2; stroke-dasharray: 7 5; fill: none; }
+  .diagram .pt { fill: var(--warn); }
+  .diagram .pta { fill: var(--sand); }
+  .diagram text { fill: var(--ink); font-family: var(--font-body); font-size: 16px; }
+  .diagram text.small { fill: var(--muted); font-size: 15px; }
+  .diagram text.lab { font-family: var(--font-mono); font-size: 15px; }
+  figcaption { font-size: 14px; color: var(--muted); margin-top: 6px; max-width: 68ch; }
+
+  /* Gabarito */
+  .ex-list { display: grid; gap: 10px; margin: 8px 0 18px; }
+  .ex { display: grid; grid-template-columns: 52px 1fr; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+  .ex-id { font-family: var(--font-mono); font-weight: 500; font-size: 14px; color: var(--accent); padding-top: 2px; }
+  .ex h4 { margin: 0 0 4px; font-family: var(--font-display); font-stretch: 88%; font-weight: 700; font-size: 16px; }
+  .ex p { margin: 0 0 6px; font-size: 15.5px; }
+  .ex p:last-child { margin-bottom: 0; }
+  .ans { font-weight: 600; }
+  .ans b { font-family: var(--font-mono); font-weight: 500; color: var(--ok); }
+  .ex .flag { color: var(--warn); font-size: 14.5px; }
+
+  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+
+  @media (max-width: 520px) {
+    body { font-size: 16px; padding-inline: 16px; }
+    nav.toc { margin-inline: -16px; padding-inline: 16px; }
+    .ex { grid-template-columns: 1fr; gap: 2px; }
+    ol.steps li { grid-template-columns: 30px 1fr; gap: 10px; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Engenharia Civil · UFGD · Prof. Dr. Agleison Ramos Omido</div>
+    <h1>Mecânica dos Solos II</h1>
+    <p class="lede">Resumo da Parte 1 (Cap. 9, 10 e 11): quanto a argila recalca e em quanto tempo. Montado a partir do que os exercícios das notas de aula pedem, com gabarito no final.</p>
+    <div class="strata" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <div class="strata-legend" aria-hidden="true"><span>aterro</span><span>areia</span><span>argila mole</span><span>rocha</span></div>
+  </header>
+</div>
+
+<nav class="toc" aria-label="Seções">
+  <ul>
+    <li><a href="#mapa">Mapa da prova</a></li>
+    <li><a href="#roteiro">Roteiro</a></li>
+    <li><a href="#base">Base (MS I)</a></li>
+    <li><a href="#elastico">Recalque elástico</a></li>
+    <li><a href="#edometrico">Edométrico</a></li>
+    <li><a href="#curva">Curva e × log σ′</a></li>
+    <li><a href="#tempo">Tempo (Terzaghi)</a></li>
+    <li><a href="#cv">cv no ensaio</a></li>
+    <li><a href="#secundario">Secundário</a></li>
+    <li><a href="#diferencial">Recalque diferencial</a></li>
+    <li><a href="#pegadinhas">Pegadinhas</a></li>
+    <li><a href="#gabarito">Gabarito</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+  <!-- MAPA -->
+  <section id="mapa">
+    <h2>Mapa da prova</h2>
+    <p>Contei o que cada exercício das notas cobra. A prova quase certamente é uma variação disso.</p>
+    <div class="table-wrap">
+      <table class="map">
+        <thead><tr><th>Tema e prioridade</th><th>Onde aparece nas notas</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pri max">Máxima</span><div>Recalque primário com C<sub>c</sub>, C<sub>r</sub> e σ′<sub>a</sub></div></td><td>Cap 9: 5–9, 11, 12, 15, 16 · Cap 10: 6–9 · Cap 11: 7, 12</td></tr>
+          <tr><td><span class="pri max">Máxima</span><div>Tempo de recalque (T, H<sub>d</sub>, U)</div></td><td>Cap 10: exemplo, 2–9 · Cap 11: 1–3, 6–12</td></tr>
+          <tr><td><span class="pri max">Máxima</span><div>σ′ no meio da camada (e índices físicos pra achar e<sub>0</sub>, γ<sub>sat</sub>)</div></td><td>Praticamente todos</td></tr>
+          <tr><td><span class="pri alta">Alta</span><div>Acréscimo de tensão Δσ (aterro, carga pontual, circular, sapata)</div></td><td>Inicial · Cap 9: 9 · Cap 10: 6, 7</td></tr>
+          <tr><td><span class="pri media">Média</span><div>Curva e × log σ′: σ′<sub>a</sub>, C<sub>c</sub>, C<sub>r</sub>, e pela altura do CP</div></td><td>Cap 9: 10, 13, 14</td></tr>
+          <tr><td><span class="pri media">Média</span><div>Poropressão num ponto (isócronas) e piezômetro</div></td><td>Cap 10: 2, 5</td></tr>
+          <tr><td><span class="pri media">Média</span><div>Recalque elástico (imediato)</div></td><td>Cap 9: 1 e exemplo de Bowles</td></tr>
+          <tr><td><span class="pri media">Média</span><div>Adensamento secundário</div></td><td>Cap 11: 5, 8</td></tr>
+          <tr><td><span class="pri baixa">Baixa</span><div>c<sub>v</sub> por Casagrande e por Taylor</div></td><td>Cap 11: 4</td></tr>
+          <tr><td><span class="pri baixa">Pergunta curta</span><div>Teoria: hipóteses de Terzaghi, analogia da mola, tipos de recalque, ensaio edométrico</div></td><td>Texto dos Cap 9 e 10</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ROTEIRO -->
+  <section id="roteiro">
+    <h2>Roteiro do problema padrão</h2>
+    <p>Quase toda questão de recalque segue esta sequência. Se travar, volte pra ela.</p>
+    <ol class="steps">
+      <li><div><strong>Desenhe o perfil</strong> com cotas, NA e o que tem acima e abaixo da argila (isso define a drenagem).</div></li>
+      <li><div><strong>Ponto de cálculo = meio da camada de argila.</strong> H = espessura inteira da camada.</div></li>
+      <li><div><strong>σ′<sub>0</sub> no meio:</strong> soma γ·h de cima pra baixo. γ natural acima do NA, γ<sub>sub</sub> = γ<sub>sat</sub> − γ<sub>w</sub> abaixo.</div></li>
+      <li><div><strong>Δσ no meio:</strong> aterro extenso → γ·h. Carga pontual → Boussinesq. Circular → fórmula da placa. Sapata → 2:1.</div></li>
+      <li><div><strong>σ′<sub>f</sub> = σ′<sub>0</sub> + Δσ.</strong> Compare σ′<sub>0</sub> e σ′<sub>f</sub> com σ′<sub>a</sub> e escolha a fórmula (só C<sub>c</sub>, só C<sub>r</sub> ou as duas).</div></li>
+      <li><div><strong>Calcule ρ total.</strong></div></li>
+      <li><div><strong>Tempo:</strong> H<sub>d</sub> (H/2 se drena dos dois lados, H se um lado é impermeável) → T = c<sub>v</sub>t/H<sub>d</sub>² → U → ρ(t) = U·ρ<sub>total</sub>.</div></li>
+    </ol>
+  </section>
+
+  <!-- BASE -->
+  <section id="base">
+    <h2><span class="cap">Pré-requisito · Mec Solos I</span>Tensões, índices e Δσ</h2>
+
+    <h3>Tensão efetiva</h3>
+    <div class="eq key">
+      <span class="lbl">Tensão efetiva vertical</span>
+      \[ \sigma'_v = \sum \gamma_i\, h_i \qquad \big(\gamma_{nat} \text{ acima do NA};\ \ \gamma_{sub} = \gamma_{sat} - \gamma_w \text{ abaixo}\big) \]
+      \[ u = \gamma_w\, h_w \qquad \sigma' = \sigma - u \]
+    </div>
+
+    <h3>Índices físicos que aparecem pra achar e<sub>0</sub> e γ<sub>sat</sub></h3>
+    <div class="eq">
+      <p>\( S\,e = w\,G_s \) → saturado: \( e = w\,G_s \) &nbsp;·&nbsp; \( \gamma_s = G_s\,\gamma_w \) &nbsp;·&nbsp; \( \gamma_d = \dfrac{\gamma}{1+w} \) &nbsp;·&nbsp; \( e = \dfrac{\gamma_s}{\gamma_d} - 1 \) &nbsp;·&nbsp; \( \gamma_{sat} = \dfrac{(G_s + e)\,\gamma_w}{1+e} \)</p>
+      <p>Corpo de prova: \( m_s = \dfrac{m}{1+w} \), \( V_s = \dfrac{m_s}{\rho_s} \), \( e_0 = \dfrac{V - V_s}{V_s} \), \( H_s = \dfrac{H_0}{1+e_0} \), \( e = \dfrac{H}{H_s} - 1 \) ou \( \Delta e = (1+e_0)\dfrac{\Delta H}{H_0} \)</p>
+    </div>
+
+    <h3>Acréscimo de tensão Δσ</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Carregamento</th><th>Fórmula</th></tr></thead>
+        <tbody>
+          <tr><td>Aterro “extenso”, “infinito”, “extensa área”</td><td>\( \Delta\sigma = \gamma_{at}\, h_{at} \), igual em qualquer profundidade</td></tr>
+          <tr><td>Carga concentrada P (Boussinesq), na vertical da carga</td><td>\( \Delta\sigma = \dfrac{3P}{2\pi z^2} = 0{,}4775\,\dfrac{P}{z^2} \)<br><span class="muted">geral: \( \dfrac{3P}{2\pi z^2}\left[\dfrac{1}{1+(r/z)^2}\right]^{5/2} \)</span></td></tr>
+          <tr><td>Placa circular de raio R, sob o centro</td><td>\( \Delta\sigma = q\left\{1 - \left[\dfrac{1}{1+(R/z)^2}\right]^{3/2}\right\} \)</td></tr>
+          <tr><td>Sapata B × L, método 2:1 (z abaixo da base)</td><td>\( \Delta\sigma = \dfrac{P}{(B+z)(L+z)} \)</td></tr>
+          <tr><td>Média na camada (regra de Simpson)</td><td>\( \Delta\sigma_{\text{méd}} = \dfrac{\Delta\sigma_{\text{topo}} + 4\,\Delta\sigma_{\text{meio}} + \Delta\sigma_{\text{base}}}{6} \)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Conversões</h3>
+    <ul class="chips">
+      <li>1 kgf/cm² ≈ 100 kPa</li>
+      <li>1 tf/m² ≈ 10 kPa</li>
+      <li>1 tf/m³ ≈ 10 kN/m³</li>
+      <li>γw = 10 kN/m³ = 1 tf/m³</li>
+      <li>1 dia = 86 400 s = 1 440 min</li>
+      <li>1 ano ≈ 3,15·10⁷ s = 525 600 min</li>
+      <li>1 cm²/s ≈ 3 154 m²/ano</li>
+    </ul>
+  </section>
+
+  <!-- CAP 9: ELÁSTICO -->
+  <section id="elastico">
+    <h2><span class="cap">Capítulo 9</span>Recalque imediato (elástico)</h2>
+    <p>O recalque total tem três parcelas: \( \rho = \rho_i + \rho_c + \rho_s \).</p>
+    <ul>
+      <li><strong>Imediato ρ<sub>i</sub>:</strong> logo após a carga. Areias e argilas não saturadas. Teoria da elasticidade.</li>
+      <li><strong>Adensamento primário ρ<sub>c</sub>:</strong> lento, argilas saturadas, a água precisa sair dos vazios. Ensaio edométrico.</li>
+      <li><strong>Compressão secundária ρ<sub>s</sub>:</strong> continua depois que a poropressão já dissipou (fluência).</li>
+    </ul>
+    <p><strong>Ensaios de deformabilidade:</strong> compressão axial (dá E e ν) · triaxial (mostra E variando com a tensão confinante σ<sub>c</sub>) · edométrico (molde impede deformação lateral).</p>
+
+    <div class="eq key">
+      <span class="lbl">Recalque elástico</span>
+      \[ \rho = \Delta\sigma\; B\; \frac{1-\nu^2}{E}\; I \]
+      <p class="muted">B = menor lado (ou diâmetro) · I = coeficiente de forma (tabela) · E e ν do solo</p>
+    </div>
+    <div class="eq">
+      <span class="lbl">Do ensaio de compressão axial</span>
+      \[ \varepsilon_l = \frac{\Delta h}{h} \qquad \varepsilon_r = \frac{\Delta r}{r} \qquad E = \frac{\sigma}{\varepsilon_l} \qquad \nu = \frac{\varepsilon_r}{\varepsilon_l} \]
+      <span class="lbl">E médio ponderado (Bowles), quando E varia com a profundidade</span>
+      \[ E = \frac{\sum E_i\,\Delta z_i}{z'} \qquad z' = \min(H,\ 5B) \]
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Placa</th><th class="num">Rígida</th><th class="num">Flexível · centro</th><th class="num">Flexível · borda/canto</th></tr></thead>
+        <tbody>
+          <tr><td>Circular</td><td class="num">0,79</td><td class="num">1,00</td><td class="num">0,64</td></tr>
+          <tr><td>Quadrada</td><td class="num">0,86</td><td class="num">1,11</td><td class="num">0,56</td></tr>
+          <tr><td>Retangular L/B = 2</td><td class="num">1,17</td><td class="num">1,52</td><td class="num">0,75</td></tr>
+          <tr><td>Retangular L/B = 5</td><td class="num">1,66</td><td class="num">2,10</td><td class="num">1,05</td></tr>
+          <tr><td>Retangular L/B = 10</td><td class="num">2,00</td><td class="num">2,54</td><td class="num">1,27</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">Rígido (sapata, bloco): recalque uniforme. Flexível (aterro): recalca mais no centro que nas bordas.</p>
+  </section>
+
+  <!-- CAP 9: EDOMÉTRICO -->
+  <section id="edometrico">
+    <h2><span class="cap">Capítulo 9</span>Recalque pela compressão edométrica</h2>
+    <p>Ideia: o que um corpo de prova recalca sob σ, a camada recalca proporcionalmente à espessura. Só os vazios diminuem, os sólidos ficam iguais.</p>
+
+    <div class="eq key">
+      <span class="lbl">Recalque a partir do índice de vazios</span>
+      \[ \rho = H\,\frac{\Delta e}{1+e_0} \qquad \varepsilon = \frac{\rho}{H} = \frac{\Delta e}{1+e_0} \]
+    </div>
+
+    <div class="eq">
+      <span class="lbl">Parâmetros de compressibilidade</span>
+      \[ a_v = -\frac{de}{d\sigma'} \qquad m_v = \frac{d\varepsilon_v}{d\sigma'} = \frac{a_v}{1+e_0} \qquad D = \frac{d\sigma'}{d\varepsilon_v} = \frac{1}{m_v} \]
+      <span class="lbl">Recalque com cada um deles</span>
+      \[ \rho = \frac{a_v\,\Delta\sigma'\,H}{1+e_0} = m_v\,\Delta\sigma'\,H = \frac{\Delta\sigma'\,H}{D} \]
+      <p class="muted">Relação com a elasticidade: \( D = \dfrac{E(1-\nu)}{(1+\nu)(1-2\nu)} \)</p>
+    </div>
+
+    <h3>Ensaio edométrico (adensamento)</h3>
+    <ul>
+      <li>Amostra indeformada no anel, drenando em cima e embaixo (pedras porosas).</li>
+      <li>Estágios dobrando a carga: 10, 20, 40, 80, 160, 320, 640, 1280, 2560 kPa.</li>
+      <li>Cada estágio fica 24 h (48 h em casos excepcionais), com leituras de altura ao longo do tempo.</li>
+      <li>No fim, descarrega em no mínimo 3 estágios e mede a expansão.</li>
+      <li>Resultado: curva e × σ′ (não linear), que vira quase duas retas em e × log σ′.</li>
+    </ul>
+  </section>
+
+  <!-- CURVA -->
+  <section id="curva">
+    <h2><span class="cap">Capítulo 9</span>Curva e × log σ′ e a escolha da fórmula</h2>
+
+    <figure>
+      <div class="diagram">
+        <svg viewBox="0 0 560 290" role="img" aria-label="Curva índice de vazios versus logaritmo da tensão efetiva, com trecho de recompressão, tensão de pré-adensamento, reta virgem e descarregamento">
+          <path class="ax" d="M60 22 V240 H540"/>
+          <text x="44" y="34">e</text>
+          <text x="540" y="262" text-anchor="end" class="small">log σ′</text>
+          <path class="ext" d="M200 57 L282 102"/>
+          <path class="curve" d="M70 58 L230 74 Q262 80 282 102 L510 226"/>
+          <path class="unload" d="M510 226 Q300 200 90 172"/>
+          <path class="guide" d="M130 64 V240"/>
+          <path class="guide" d="M246 78 V240"/>
+          <path class="guide" d="M380 155 V240"/>
+          <circle class="pt" cx="130" cy="64" r="5"/>
+          <circle class="pta" cx="246" cy="78" r="5"/>
+          <circle class="pt" cx="380" cy="155" r="5"/>
+          <text x="130" y="258" text-anchor="middle" class="lab">σ′0</text>
+          <text x="246" y="258" text-anchor="middle" class="lab">σ′a</text>
+          <text x="380" y="258" text-anchor="middle" class="lab">σ′f</text>
+          <text x="78" y="46">recompressão (Cr)</text>
+          <text x="392" y="150">reta virgem (Cc)</text>
+          <text x="110" y="194" class="small">descarregamento</text>
+        </svg>
+      </div>
+      <figcaption>Caso mais completo: σ′<sub>0</sub> no trecho de recompressão e σ′<sub>f</sub> na reta virgem. Usa C<sub>r</sub> de σ′<sub>0</sub> até σ′<sub>a</sub> e C<sub>c</sub> de σ′<sub>a</sub> até σ′<sub>f</sub>.</figcaption>
+    </figure>
+
+    <div class="eq">
+      <span class="lbl">Inclinações (mesma fórmula, trechos diferentes)</span>
+      \[ C_r \text{ ou } C_c = \frac{e_1 - e_2}{\log\sigma'_2 - \log\sigma'_1} \]
+      <p class="muted">C<sub>r</sub> com dois pontos do trecho inicial; C<sub>c</sub> com dois pontos da reta virgem. Correlações que aparecem: \( C_c = 0{,}009\,(LL - 10) \), \( C_r \approx C_c/5 \) a \( C_c/10 \).</p>
+    </div>
+
+    <h3>Tensão de pré-adensamento σ′<sub>a</sub> (gráfico)</h3>
+    <div class="cases">
+      <div class="case">
+        <h4>Casagrande</h4>
+        <ol>
+          <li>Ache o ponto A de maior curvatura.</li>
+          <li>Por A: reta horizontal AH e tangente AT.</li>
+          <li>Trace a bissetriz AB do ângulo entre elas.</li>
+          <li>Prolongue a reta virgem até cruzar a bissetriz: ponto R.</li>
+          <li>σ′<sub>a</sub> = abscissa de R.</li>
+        </ol>
+      </div>
+      <div class="case">
+        <h4>Pacheco Silva</h4>
+        <ol>
+          <li>Reta horizontal passando por e<sub>0</sub>.</li>
+          <li>Prolongue a reta virgem até ela: ponto A.</li>
+          <li>Desça na vertical de A até a curva: ponto B.</li>
+          <li>Horizontal de B até a reta virgem: ponto C.</li>
+          <li>σ′<sub>a</sub> = abscissa de C.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="eq key">
+      <span class="lbl">Razão de sobre-adensamento (definição do professor)</span>
+      \[ RSA = \frac{\sigma'_a}{\sigma'_0} \]
+      <p><strong>= 1</strong> normalmente adensado (nunca teve carga maior) · <strong>&gt; 1</strong> pré-adensado (já suportou mais: erosão, NA que baixou, carga removida) · <strong>&lt; 1</strong> sub-adensado (ainda adensando, carregamento recente)</p>
+    </div>
+
+    <h3>As três fórmulas de recalque primário</h3>
+    <div class="cases">
+      <div class="case">
+        <h4>A · Normalmente adensado</h4>
+        <p class="when">σ′<sub>0</sub> = σ′<sub>a</sub> (tudo na reta virgem)</p>
+        \[ \rho = \frac{H}{1+e_0}\,C_c\log\frac{\sigma'_f}{\sigma'_0} \]
+      </div>
+      <div class="case">
+        <h4>B · Pré-adensado, não passa de σ′<sub>a</sub></h4>
+        <p class="when">σ′<sub>f</sub> ≤ σ′<sub>a</sub> (tudo na recompressão)</p>
+        \[ \rho = \frac{H}{1+e_0}\,C_r\log\frac{\sigma'_f}{\sigma'_0} \]
+      </div>
+      <div class="case">
+        <h4>C · Pré-adensado, passa de σ′<sub>a</sub></h4>
+        <p class="when">σ′<sub>0</sub> &lt; σ′<sub>a</sub> &lt; σ′<sub>f</sub></p>
+        \[ \rho = \frac{H}{1+e_0}\left[C_r\log\frac{\sigma'_a}{\sigma'_0} + C_c\log\frac{\sigma'_f}{\sigma'_a}\right] \]
+      </div>
+    </div>
+    <div class="tip">
+      <span class="lbl">Na hora da conta</span>
+      <ul>
+        <li>log é base 10. As unidades de tensão se cancelam na razão, então dá pra usar kgf/cm² ou tf/m² direto.</li>
+        <li>Camada muito espessa (tipo 10 m): o professor pode querer subcamadas. Cada uma com σ′<sub>0</sub> e Δσ no próprio meio, depois soma.</li>
+        <li>Se o enunciado dá “σ′<sub>a</sub> é X kPa maior que σ′<sub>0</sub> em qualquer ponto” (erosão), então σ′<sub>a</sub> = σ′<sub>0</sub> + X.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TEMPO -->
+  <section id="tempo">
+    <h2><span class="cap">Capítulos 10 e 11</span>Teoria do adensamento: quanto tempo</h2>
+
+    <h3>Analogia da mola (Terzaghi)</h3>
+    <p>Mola = esqueleto de solo, água = poropressão, furinho no pistão = permeabilidade. No instante da carga, a água segura tudo (Δu = Δσ, Δσ′ = 0). A água vai saindo e a carga passa pra mola. No fim, Δu = 0 e Δσ′ = Δσ.</p>
+
+    <h3>As 9 hipóteses</h3>
+    <p>Solo saturado · compressão 1D · fluxo 1D · solo homogêneo · grãos e água incompressíveis · meio contínuo (elementos infinitesimais) · vale Darcy · propriedades constantes durante o processo · e varia linearmente com σ′ (a<sub>v</sub> constante).</p>
+
+    <div class="eq key">
+      <span class="lbl">Grau de adensamento num ponto (profundidade z)</span>
+      \[ U_z = \frac{\varepsilon}{\varepsilon_f} = \frac{e_1 - e}{e_1 - e_2} = \frac{\sigma' - \sigma'_1}{\sigma'_2 - \sigma'_1} = \frac{u_0 - u}{u_0} = 1 - \frac{u}{u_0} \]
+      <p class="muted">Em palavras: fração de Δe que já ocorreu = fração de Δσ′ que já chegou no solo = fração da poropressão em excesso que já dissipou.</p>
+    </div>
+
+    <div class="eq key">
+      <span class="lbl">Equação, coeficiente de adensamento e fator tempo</span>
+      \[ c_v\,\frac{\partial^2 u}{\partial z^2} = \frac{\partial u}{\partial t} \qquad c_v = \frac{k\,(1+e)}{a_v\,\gamma_w} = \frac{k}{m_v\,\gamma_w} \quad [L^2/T] \]
+      \[ T = \frac{c_v\,t}{H_d^{\,2}} \qquad t = \frac{T\,H_d^{\,2}}{c_v} \]
+    </div>
+
+    <div class="cases">
+      <div class="case">
+        <h4>Dupla drenagem → H<sub>d</sub> = H/2</h4>
+        <p class="when">Areia (ou aterro granular) em cima e embaixo da argila.</p>
+      </div>
+      <div class="case">
+        <h4>Drenagem simples → H<sub>d</sub> = H</h4>
+        <p class="when">Um lado impermeável: rocha, outra argila, aterro argiloso.</p>
+      </div>
+    </div>
+
+    <h3>Isócronas: poropressão num ponto</h3>
+    <p>O ábaco dá U<sub>z</sub> em função de z/H<sub>d</sub> e T, com <strong>z medido a partir da face que drena</strong>. No meio de uma camada com dupla drenagem, z/H<sub>d</sub> = 1. Com drenagem simples, a face impermeável é z/H<sub>d</sub> = 1. Exemplo das notas: T = 0,2 dá 23% no centro e 44% a 1/4 da camada.</p>
+    <div class="eq">
+      \[ u_{\text{excesso}} = u_0\,(1 - U_z) \qquad \sigma' = \sigma'_0 + U_z\,\Delta\sigma \qquad u_{\text{piez}} = u_{\text{hidrost}} + u_{\text{excesso}} \]
+      <p class="muted">Leitura do piezômetro em metros de coluna d’água: u/γ<sub>w</sub> acima do ponto.</p>
+    </div>
+
+    <h3>U médio da camada (porcentagem de recalque)</h3>
+    <div class="eq key">
+      \[ U = \frac{\rho(t)}{\rho_{\text{total}}} \]
+      \[ U \le 60\%:\ \ T = \frac{\pi}{4}\,U^2 \qquad\qquad U > 60\%:\ \ T = -0{,}933\,\log(1-U) - 0{,}085 \]
+      <span class="lbl">Invertendo (quando você tem T e quer U)</span>
+      \[ T \le 0{,}283:\ \ U = \sqrt{4T/\pi} \qquad\qquad T > 0{,}283:\ \ U = 1 - 10^{-(T+0{,}085)/0{,}933} \]
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>U</th><th class="num">10%</th><th class="num">20%</th><th class="num">30%</th><th class="num">40%</th><th class="num">50%</th><th class="num">60%</th><th class="num">70%</th><th class="num">80%</th><th class="num">90%</th><th class="num">95%</th><th class="num">99%</th></tr></thead>
+        <tbody><tr><th>T</th><td class="num">0,008</td><td class="num">0,031</td><td class="num">0,071</td><td class="num">0,126</td><td class="num">0,197</td><td class="num">0,287</td><td class="num">0,403</td><td class="num">0,567</td><td class="num">0,848</td><td class="num">1,128</td><td class="num">1,781</td></tr></tbody>
+      </table>
+    </div>
+
+    <div class="tip">
+      <span class="lbl">Atalhos que resolvem metade dos exercícios</span>
+      <ul>
+        <li>Enquanto U ≤ 60%, U ∝ √t. Logo \( \dfrac{t_2}{t_1} = \left(\dfrac{\rho_2}{\rho_1}\right)^2 \). Tempo ×4 → recalque ×2.</li>
+        <li>Se a conta pelo atalho passar de 60%, ela está errada: volte pra T e use a fórmula de U &gt; 60%.</li>
+        <li>t ∝ H<sub>d</sub>². Trocar dupla por simples drenagem multiplica o tempo por 4.</li>
+        <li>O recalque total não depende de c<sub>v</sub> nem da drenagem. O tempo não depende do tamanho da carga.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CV -->
+  <section id="cv">
+    <h2><span class="cap">Capítulo 11</span>c<sub>v</sub> a partir do ensaio</h2>
+    <p>Usa as leituras de altura do CP ao longo do tempo num estágio de carga. O CP drena nas duas faces, então H<sub>d</sub> = h<sub>50</sub>/2.</p>
+    <div class="cases">
+      <div class="case">
+        <h4>Casagrande · altura × log t</h4>
+        <ol>
+          <li><strong>h<sub>0</sub>:</strong> pegue t<sub>1</sub> e t<sub>2</sub> = 4t<sub>1</sub> no começo. x = h(t<sub>1</sub>) − h(t<sub>2</sub>). h<sub>0</sub> = h(t<sub>1</sub>) + x.</li>
+          <li><strong>h<sub>100</sub>:</strong> cruzamento da tangente do trecho íngreme (primário) com a do trecho final (secundário).</li>
+          <li>\( h_{50} = (h_0 + h_{100})/2 \) e leia t<sub>50</sub> na curva.</li>
+          <li>\( c_v = \dfrac{0{,}197\,H_d^{\,2}}{t_{50}} \)</li>
+        </ol>
+      </div>
+      <div class="case">
+        <h4>Taylor · altura × √t</h4>
+        <ol>
+          <li>Reta pelo trecho inicial (que fica reto em √t). Onde corta o eixo = h<sub>0</sub>.</li>
+          <li>Segunda reta saindo de h<sub>0</sub> com abscissas 1,15× maiores (OC = 1,15·OB).</li>
+          <li>Onde ela corta a curva: √t<sub>90</sub>.</li>
+          <li>\( c_v = \dfrac{0{,}848\,H_d^{\,2}}{t_{90}} \), com \( h_{50} = h_0 - \tfrac{5}{9}(h_0 - h_{90}) \)</li>
+        </ol>
+      </div>
+    </div>
+    <p class="muted">Nas notas, a fórmula de h<sub>50</sub> de Taylor está impressa como h<sub>0</sub>/h<sub>90</sub>. É diferença, não divisão.</p>
+  </section>
+
+  <!-- SECUNDÁRIO -->
+  <section id="secundario">
+    <h2><span class="cap">Capítulo 11</span>Adensamento secundário</h2>
+    <p>Compressão lenta que continua depois do primário. É o trecho reto final da curva altura × log t.</p>
+    <div class="eq key">
+      \[ C_{\alpha\varepsilon} = \frac{\Delta\varepsilon}{\Delta\log t} \qquad C_{\alpha e} = \frac{\Delta e}{\Delta\log t} \qquad C_{\alpha\varepsilon} = \frac{C_{\alpha e}}{1+e_0} \]
+      \[ \rho_s = C_{\alpha\varepsilon}\; H\; \log\frac{t}{t_p} \qquad (t_p = \text{fim do primário}) \]
+    </div>
+    <p>Valores típicos: argilas NA entre 0,5% e 2%; muito plásticas e orgânicas até 3%. Cada ciclo de log no tempo soma C<sub>αε</sub>·H. Exemplo das notas: 10 m, primário acaba em 2 anos, C<sub>α</sub> = 1% → mais 10 cm até 20 anos e mais 10 cm de 20 a 200 anos.</p>
+  </section>
+
+  <!-- DIFERENCIAL -->
+  <section id="diferencial">
+    <h2><span class="cap">Capítulo 11</span>Recalque diferencial</h2>
+    <div class="eq">
+      \[ \delta = \frac{\text{recalque diferencial}}{\text{distância entre os elementos}} = \frac{\Delta}{L} \]
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th class="num">δ</th><th>O que acontece (Bjerrum)</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1/750</td><td>Dificuldade com máquinas sensíveis a recalque</td></tr>
+          <tr><td class="num">1/600</td><td>Perigo para pórticos com diagonais</td></tr>
+          <tr><td class="num">1/500</td><td>Limite de segurança para edifícios onde fissura não é aceitável</td></tr>
+          <tr><td class="num">1/300</td><td>Primeiras fissuras em painéis; problema com pontes rolantes</td></tr>
+          <tr><td class="num">1/250</td><td>Inclinação de edifícios altos rígidos fica visível</td></tr>
+          <tr><td class="num">1/150</td><td>Fissuração considerável em paredes; danos estruturais em geral</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PEGADINHAS -->
+  <section id="pegadinhas">
+    <h2>Pegadinhas</h2>
+    <div class="trap">
+      <span class="lbl">Confira antes de entregar</span>
+      <ul>
+        <li>Usou σ′, e não σ total? Abaixo do NA é γ<sub>sub</sub>.</li>
+        <li>Tensões no <strong>meio</strong> da camada; H é a espessura inteira; H<sub>d</sub> é outra coisa.</li>
+        <li>Rocha é impermeável. Areia drena. Aterro argiloso é impermeável.</li>
+        <li>Mudou a hipótese de drenagem? O recalque final continua igual; só o tempo muda.</li>
+        <li>Dobrou a carga? O tempo pra atingir o mesmo U não muda.</li>
+        <li>30% em 10 dias <strong>não</strong> vira 90% em 90 dias: o atalho √t só vale até 60% (dá 83%).</li>
+        <li>c<sub>v</sub> e H<sub>d</sub> na mesma unidade (cm²/s com cm, m²/ano com m). Aparece até cm²/min.</li>
+        <li>RSA = σ′<sub>a</sub>/σ′<sub>0</sub>, não o contrário.</li>
+        <li>Isócronas: z medido a partir da face drenante.</li>
+        <li>γ do aterro dado por w e γ<sub>d</sub>: γ = γ<sub>d</sub>(1 + w).</li>
+        <li>Subir o NA diminui σ′<sub>0</sub>, e o mesmo Δσ passa a dar mais recalque (efeito do log).</li>
+      </ul>
+    </div>
+
+    <h3>Coisas estranhas nas notas</h3>
+    <div class="tip">
+      <ul>
+        <li><strong>Cap 9, ex. 1:</strong> falta a tensão aplicada no ensaio axial. Com σ = 100 kPa sai E ≈ 14 000 kPa redondo, então deve ser isso.</li>
+        <li><strong>Cap 10, ex. 5:</strong> a<sub>v</sub> = 0,06 kPa⁻¹ não bate com os 50 cm de recalque. Use os 50 cm dados; o a<sub>v</sub> só serve pra calcular c<sub>v</sub> (dá 2·10⁻⁷ m²/s redondo).</li>
+        <li><strong>Cap 11, ex. 4:</strong> na tabela, t = 4 min mostra 35,966 mm; o gráfico mostra 35,497. Vale o gráfico.</li>
+        <li><strong>Cap 11, ex. 7:</strong> c<sub>r</sub> = 0,7 é maior que c<sub>c</sub> = 0,45, o que não faz sentido físico. Só que com 0,07 o recalque total (≈ 13 cm) nunca chega nos 15 cm pedidos. Vale perguntar ao professor.</li>
+        <li><strong>Cap 10, grau de adensamento:</strong> a definição de ε<sub>f</sub> repete a de ε. ε<sub>f</sub> é a deformação no fim do adensamento.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- GABARITO -->
+  <section id="gabarito">
+    <h2>Gabarito comentado</h2>
+    <p>Com γ<sub>w</sub> = 10 kN/m³. Tente montar sozinho e confira o número. Valores de gráfico (σ′<sub>a</sub>, Casagrande, Taylor) variam uns 10% conforme o traçado.</p>
+
+    <h3>Conceitos iniciais (Mec Solos I)</h3>
+    <div class="ex-list">
+      <article class="ex">
+        <div class="ex-id">0</div>
+        <div>
+          <h4>σ′ no meio da argila siltosa (cota −10)</h4>
+          <p>a) 1,5·1 + 0,6·1 + 0,72·6 + 0,78·2.</p>
+          <p>b) NA a −2, sem a argila orgânica, aterro de 3 m (topo em +1). Boussinesq com z = 11 m: 0,4775·100/11² = 0,39 tf/m².</p>
+          <p class="ans">a) <b>7,98 tf/m² ≈ 80 kPa</b> · b) 6,3 + 4,32 + 1,56 + 0,39 = <b>12,57 tf/m² ≈ 126 kPa</b></p>
+        </div>
+      </article>
+    </div>
+
+    <h3>Capítulo 9 · Magnitude do recalque</h3>
+    <div class="ex-list">
+      <article class="ex">
+        <div class="ex-id">9.1</div>
+        <div>
+          <h4>Bloco 1 × 2 m em areia, 200 kN</h4>
+          <p>ε<sub>l</sub> = 0,7142/100. Com σ<sub>ensaio</sub> = 100 kPa: E ≈ 14 000 kPa. Δσ = 200/2 = 100 kPa, B = 1 m, rígido L/B = 2 → I = 1,17.</p>
+          <p class="ans">ρ = 100·1·(1 − 0,16)/14 000·1,17 = <b>7,0 mm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">Ex.</div>
+        <div>
+          <h4>Bowles: sapata rígida 1 × 1 m, 90 kPa, ν = 0,3</h4>
+          <p>Perfil do gráfico: E = 4000 (0–2 m), 3000 (2–3 m), 5000 (3–5 m). z′ = min(5; 5·1) = 5 m → E = (8000 + 3000 + 10 000)/5 = 4200 kPa. Quadrada rígida: I = 0,86.</p>
+          <p class="ans">ρ = 90·1·0,91/4200·0,86 = <b>16,8 mm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.2</div>
+        <div>
+          <h4>Três camadas com e<sub>0</sub> e Δe</h4>
+          <p>Soma de HΔe/(1+e<sub>0</sub>): 4·0,04/1,56 + 8·0,20/2,19 + 6·0,02/1,47 = 0,103 + 0,731 + 0,082.</p>
+          <p class="ans"><b>ρ ≈ 0,91 m</b> (a argila responde por 80%)</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.3</div>
+        <div>
+          <h4>6 m, e de 1,037 para 0,981</h4>
+          <p class="ans">6·0,056/2,037 = <b>16,5 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.4</div>
+        <div>
+          <h4>Achar e<sub>0</sub> pelos índices</h4>
+          <p>γ<sub>d</sub> = 16/1,26 = 12,70 kN/m³; e<sub>0</sub> = 26,5/12,70 − 1 = 1,087.</p>
+          <p class="ans">ρ = 6·(1,087 − 1,017)/2,087 = <b>20 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.5</div>
+        <div>
+          <h4>NA, 4 → 10 kg/cm², e de 1,22 para 1,02</h4>
+          <p class="ans">C<sub>c</sub> = 0,20/log(10/4) = <b>0,50</b> · ρ = 3·0,20/2,22 = <b>27 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.6</div>
+        <div>
+          <h4>Aterro 0,5 m sobre 10 m de argila, NA na superfície</h4>
+          <p>σ′<sub>0</sub>(5 m) = 5·5 = 25 kPa; Δσ = 10 kPa; σ′<sub>f</sub> = 35 &lt; σ′<sub>a</sub> = 150 → só C<sub>r</sub> (RSA = 6).</p>
+          <p class="ans">ρ = 10/4,5·0,15·log(35/25) = <b>4,9 cm</b> <span class="muted">(com subcamadas sai um pouco mais)</span></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.7</div>
+        <div>
+          <h4>Mesma argila, três histórias de tensão</h4>
+          <p>σ′<sub>0</sub> = 200 − 100 = 100 kPa; σ′<sub>f</sub> = 200; H/(1+e<sub>0</sub>) = 1,5/1,9.</p>
+          <p class="ans">a) NA: <b>7,1 cm</b> · b) RSA 2 (σ′<sub>a</sub> = 200 = σ′<sub>f</sub>, só C<sub>r</sub>): <b>1,2 cm</b> · c) RSA 1,5 (σ′<sub>a</sub> = 150, caso C): <b>3,7 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.8</div>
+        <div>
+          <h4>Pré-adensada por erosão (σ′<sub>a</sub> = σ′<sub>0</sub> + 18)</h4>
+          <p>Meio da argila (−8,5): σ′<sub>0</sub> = 8·2,5 + 5·4,5 = 42,5; σ′<sub>a</sub> = 60,5; σ′<sub>f</sub> = 82,5 → caso C.</p>
+          <p class="ans">ρ = 9/3,4·[0,3·log(60,5/42,5) + 1,8·log(82,5/60,5)] = <b>≈ 0,76 m</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.9</div>
+        <div>
+          <h4>Carga pontual de 3500 kN</h4>
+          <p>Meio da argila (−7): σ′<sub>0</sub> = 18·5 + 9·2 = 108 kPa; Δσ = 0,4775·3500/7² = 34,1 kPa.</p>
+          <p class="ans">ρ = 4/2,2·0,5·log(142,1/108) = <b>10,8 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.10</div>
+        <div>
+          <h4>Ensaio completo: e, σ′<sub>a</sub>, RSA, C<sub>c</sub>, C<sub>r</sub>, a<sub>v</sub>, m<sub>v</sub>, D</h4>
+          <p>m<sub>s</sub> = 459,8/2,257 = 203,7 g; V<sub>s</sub> = 77,76 cm³; e<sub>0</sub> = 3,386; H<sub>s</sub> = 8,664 mm; e = H/H<sub>s</sub> − 1. Alguns: e(40) = 3,307, e(80) = 3,151, e(160) = 2,784, e(320) = 2,408, e(640) = 2,098.</p>
+          <p class="ans">a) σ′<sub>a</sub> <b>≈ 62 kPa</b> · RSA = 62/40 = <b>1,55</b> · C<sub>c</sub> ≈ <b>1,03</b> (320→640) · C<sub>r</sub> ≈ <b>0,09</b> (10→40)</p>
+          <p class="ans">b) 40 → 120 kPa, e(120) ≈ 2,937 (interpolando no log): a<sub>v</sub> ≈ <b>4,6·10⁻³ kPa⁻¹</b> · m<sub>v</sub> ≈ <b>1,1·10⁻³ kPa⁻¹</b> · D ≈ <b>930 kPa</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.11</div>
+        <div>
+          <h4>Areia 10,4 m sobre argila NA de 2 m (tudo saturado)</h4>
+          <p>Argila: e = 0,43·2,7 = 1,161, γ<sub>sat</sub> = 17,87. Areia: γ<sub>sat</sub> = 19,66. Meio da argila (11,4 m): σ = 204,5 + 17,9; u = 84 → σ′<sub>0</sub> = 138,3 kPa.</p>
+          <p class="ans">ρ = 2/2,161·0,3·log(278,3/138,3) = <b>8,4 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.12</div>
+        <div>
+          <h4>Δσ = 100 kPa, C<sub>c</sub> por correlação com LL</h4>
+          <p>C<sub>c</sub> = 0,009·30 = 0,27; C<sub>r</sub> = 0,054. σ′<sub>0</sub> = 14·2 + 8·4 + 9·1,75 = 75,75; σ′<sub>f</sub> = 175,75.</p>
+          <p class="ans">a) NA: <b>19,2 cm</b> · b) σ′<sub>a</sub> = 200: <b>3,8 cm</b> · c) σ′<sub>a</sub> = 150: <b>6,7 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.13</div>
+        <div>
+          <h4>σ′<sub>a</sub> por Casagrande e Pacheco Silva</h4>
+          <p>Plote e × log σ′ e siga os passos. C<sub>c</sub> com dois pontos do trecho mais reto depois do joelho, por exemplo 200 → 400: (0,78 − 0,62)/log 2 ≈ 0,53.</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.14</div>
+        <div>
+          <h4>Curva a partir de alturas</h4>
+          <p>Supondo saturado: G<sub>s</sub> = 2,83 → e<sub>0</sub> = 0,31·2,83 = 0,877. Depois \( e = e_0 - (1+e_0)\,\Delta H/H_0 \).</p>
+          <p class="ans">e = 0,877 · 0,836 · 0,790 · 0,770 · 0,683 · 0,465 · 0,159 (para 0 a 800 kPa)</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.15</div>
+        <div>
+          <h4>Aterro 3 m (17 kN/m³) em extensa área</h4>
+          <p>Meio da argila (−15): σ′<sub>0</sub> = 16·4 + 10·8 + 7,8·3 = 167,4 kPa; Δσ = 51 kPa.</p>
+          <p class="ans">ρ = 6/2,19·0,4·log(218,4/167,4) = <b>12,7 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">9.16</div>
+        <div>
+          <h4>Δσ = 30 kPa; depois com NA na superfície</h4>
+          <p>Sem água acima do meio da argila: σ′<sub>0</sub> = 20·4 + 18·1,25 = 102,5. NA na superfície: σ′<sub>0</sub> = 10·4 + 8·1,25 = 50.</p>
+          <p class="ans"><b>2,7 cm</b> → <b>4,9 cm</b> com o NA subindo (σ′<sub>0</sub> menor, recalque maior)</p>
+        </div>
+      </article>
+    </div>
+
+    <h3>Capítulo 10 · Tempo</h3>
+    <div class="ex-list">
+      <article class="ex">
+        <div class="ex-id">10.1</div>
+        <div>
+          <h4>Analogia, 3 dias</h4>
+          <p class="ans">U<sub>z</sub> = Δσ′/Δσ = 40/50 = <b>80%</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">Ex.</div>
+        <div>
+          <h4>3 m sobre rocha, c<sub>v</sub> = 0,025 cm²/min, ρ = 8 cm</h4>
+          <p>Drenagem simples: H<sub>d</sub> = 300 cm.</p>
+          <p class="ans">t<sub>80</sub> = 0,567·300²/0,025 = 2,04·10⁶ min ≈ <b>3,9 anos</b> · 2,5 cm (U = 31%, T = 0,077): <b>≈ 192 dias</b> · 1 ano: T = 0,146, U = 43% → <b>3,45 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">10.2</div>
+        <div>
+          <h4>Poropressão após 3 anos (10 m, c<sub>v</sub> = 2 m²/ano)</h4>
+          <p>Aterro em cima e areia embaixo drenam → H<sub>d</sub> = 5 m. Δu<sub>0</sub> = 100 kPa. T = 2·3/25 = 0,24.</p>
+          <p class="ans">Meio (z/H<sub>d</sub> = 1): U<sub>z</sub> ≈ 0,30 → <b>u ≈ 70 kPa</b> · a 2 m (z/H<sub>d</sub> = 0,4): U<sub>z</sub> ≈ 0,58 → <b>u ≈ 42 kPa</b> <span class="muted">(excesso; somar a hidrostática se pedir a total)</span></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">10.3</div>
+        <div>
+          <h4>60 cm totais, 18 cm em 10 dias. E em 90 dias?</h4>
+          <p>U = 30% → T = 0,0707. Em 90 dias T = 0,636. Pelo atalho daria 90%, mas passou de 60%.</p>
+          <p class="ans">U = 1 − 10<sup>−(0,636+0,085)/0,933</sup> = 83% → <b>ρ ≈ 50 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">10.4</div>
+        <div>
+          <h4>Dupla vira simples drenagem</h4>
+          <p class="ans">Recalque total continua <b>25,4 cm</b>. H<sub>d</sub> dobra → tempo ×4 → <b>16 anos</b> para 7,6 cm.</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">10.5</div>
+        <div>
+          <h4>Aterro argiloso sobre 4 m de argila, areia embaixo</h4>
+          <p>c<sub>v</sub> = 3·10⁻⁸·4/(0,06·10) = 2·10⁻⁷ m²/s. Aterro argiloso é impermeável → H<sub>d</sub> = 4 m. Δσ = 45 kPa.</p>
+          <p class="ans">a) t<sub>50</sub> = 0,197·16/2·10⁻⁷ = <b>182 dias</b> · b) 3 meses: T = 0,097, U = 35% → <b>17,6 cm</b></p>
+          <p class="ans">c) O ponto −1 m está a 3 m da face drenante → z/H<sub>d</sub> = 0,75 → U<sub>z</sub> ≈ 0,09 → σ′ = 4 + 0,09·45 ≈ <b>8,2 kPa</b> · d) u = 10 + 45·0,91 ≈ 50,8 kPa → <b>5,1 m de coluna d’água</b> (nível em ≈ +4,1 m)</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">10.6</div>
+        <div>
+          <h4>Caixa d’água circular R = 4 m, q = 50 kPa na cota +2</h4>
+          <p>Meio da argila (−5): σ′<sub>0</sub> = 15,5·4 + 7,2·1 + 6,3·3 = 88,1 kPa (RSA = 1,32). z = 7 m sob a base: Δσ = 17,3 kPa → σ′<sub>f</sub> = 105,4 &lt; 116 → só C<sub>r</sub> = 0,058. H<sub>d</sub> = 3 m.</p>
+          <p class="ans">a) <b>≈ 1,3 cm</b> · b) 6 meses: T = 0,129, U = 41% → <b>≈ 0,5 cm</b> · c) t<sub>80</sub> = 0,567·9/7,38·10⁻⁸ s ≈ <b>800 dias (2,2 anos)</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">10.7</div>
+        <div>
+          <h4>Sapata 2 × 2 m, 300 kN, 19 mm em 12 meses</h4>
+          <p>Argila: e<sub>0</sub> = 0,24·2,74 = 0,658; γ<sub>sat</sub> = 20,5. σ′<sub>0</sub>(−3) = 14 + 7 + 10,5 = 31,5 &lt; σ′<sub>a</sub> = 40. C<sub>r</sub> = 0,065 (4→40); C<sub>c</sub> = 0,324 (40→160).</p>
+          <p class="ans">a) 2:1 com Simpson: (33,3 + 4·18,75 + 12)/6 ≈ <b>20 kPa</b> · b) caso C: <b>≈ 51 mm</b> · c) U = 19/51 ≈ <b>37%</b> · d) T = 0,108, H<sub>d</sub> = 1 m → c<sub>v</sub> ≈ <b>0,11 m²/ano</b> · e) U ∝ √t: 19·√2 ≈ <b>27 mm</b></p>
+          <p class="muted">O item (e) nem depende de (a) e (b): enquanto U ≤ 60%, dobrar o tempo multiplica o recalque por √2.</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">10.8</div>
+        <div>
+          <h4>Aterro infinito 5 m (w = 16%, γ<sub>d</sub> = 17,5) sobre argila, rocha embaixo</h4>
+          <p>γ = 17,5·1,16 = 20,3 → Δσ = 101,5 kPa. σ′<sub>0</sub>(−7) = 54 + 18 + 13 = 85 kPa. H<sub>d</sub> = 4 m.</p>
+          <p class="ans">a) RSA = 110/85 = 1,29 → <b>pré-adensada</b> · b) caso C: <b>19,2 cm</b> · c) t<sub>99</sub> = 1,781·400²/0,02 s ≈ <b>165 dias</b> · d) <b>9,6 cm</b> em t<sub>50</sub> ≈ <b>18 dias</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">10.9</div>
+        <div>
+          <h4>Quanto tempo para 33 cm?</h4>
+          <p>Δσ = 16,5·4 = 66; σ′<sub>0</sub>(−9) = 85 + 36 = 121; ρ = 8/2,2·0,6·log(187/121) = 41,25 cm. U = 33/41,25 = 80% (número redondo, sinal de que está certo). H<sub>d</sub> = 4 m.</p>
+          <p class="ans">t = 0,567·400²/10⁻⁴ s ≈ <b>28,8 anos</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">10.10</div>
+        <div>
+          <h4>Altura de aterro para terminar na cota +3,0</h4>
+          <p>Cota final = 0,5 − ρ + h = 3,0 → h = 2,5 + ρ, com ρ = m<sub>v</sub>·(18h)·6 = 0,324h.</p>
+          <p class="ans">h = 2,5/0,676 = <b>3,70 m</b> (recalque de 1,20 m)</p>
+        </div>
+      </article>
+    </div>
+
+    <h3>Capítulo 11 · Tópicos complementares</h3>
+    <div class="ex-list">
+      <article class="ex">
+        <div class="ex-id">11.1</div>
+        <div>
+          <h4>45 cm totais, 12 cm em 14 dias; recalque em 56 dias</h4>
+          <p class="ans">Tempo ×4 → U ×2: 26,7% → 53,3% (ainda ≤ 60%) → <b>24 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.2</div>
+        <div>
+          <h4>50 cm totais, 18 cm em 2 dias; quando dá 30 cm?</h4>
+          <p class="ans">U de 36% → 60%: t = 2·(30/18)² = <b>5,6 dias</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.3</div>
+        <div>
+          <h4>6 m, dupla drenagem, 50% em 1 ano</h4>
+          <p class="ans">c<sub>v</sub> = 0,197·3²/1 = <b>1,77 m²/ano</b> · com o dobro da carga: <b>continua 1 ano</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.4</div>
+        <div>
+          <h4>c<sub>v</sub> do estágio 80 → 160 kPa</h4>
+          <p>Casagrande: t = 0,25 e 1 min → x = 0,106 → h<sub>0</sub> ≈ 35,93 mm; h<sub>100</sub> ≈ 33,31 mm; h<sub>50</sub> ≈ 34,62 mm → t<sub>50</sub> ≈ 36 min; H<sub>d</sub> ≈ 17,3 mm.</p>
+          <p>Taylor: h<sub>0</sub> ≈ 35,93 mm; √t<sub>90</sub> ≈ 11,6 → t<sub>90</sub> ≈ 133 min; H<sub>d</sub> ≈ 17,4 mm.</p>
+          <p class="ans">Casagrande: c<sub>v</sub> ≈ <b>0,016 cm²/min</b> (2,7·10⁻⁴ cm²/s) · Taylor: c<sub>v</sub> ≈ <b>0,019 cm²/min</b> (3,2·10⁻⁴ cm²/s)</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.5</div>
+        <div>
+          <h4>Secundário: 10 m, t<sub>p</sub> = 2 anos, C<sub>α</sub> = 1%</h4>
+          <p class="ans">20 anos: 0,01·10·log 10 = <b>10 cm</b> · 200 anos: 0,01·10·log 100 = <b>20 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.6</div>
+        <div>
+          <h4>Do laboratório pro campo</h4>
+          <p>Lab: H<sub>d</sub> = 9,5 mm, T<sub>65</sub> = 0,340 → c<sub>v</sub> = 0,340·0,95²/10 = 0,0307 cm²/min. Campo: rocha embaixo → H<sub>d</sub> = 400 cm; T<sub>40</sub> = 0,126.</p>
+          <p class="ans">t = 0,126·400²/0,0307 ≈ 6,6·10⁵ min ≈ <b>456 dias (1,25 ano)</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.7</div>
+        <div>
+          <h4>Aterro 2,2 m sobre argila pré-adensada</h4>
+          <p>Δσ = 19,5·2,2 = 42,9; σ′<sub>0</sub>(−5,5) = 11·3,2 + 6,5·2,3 = 50,2 &lt; σ′<sub>a</sub> = 70 &lt; σ′<sub>f</sub> = 93,1 → caso C. H<sub>d</sub> = 2,3 m.</p>
+          <p class="ans">Com c<sub>r</sub> = 0,7 (como está): <b>ρ ≈ 31 cm</b>; 15 cm → U = 48%, T = 0,179 → <b>≈ 8 dias</b></p>
+          <p class="flag">Com c<sub>r</sub> = 0,07, ρ ≈ 13 cm e os 15 cm nunca acontecem. Ver “coisas estranhas”.</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.8</div>
+        <div>
+          <h4>4 m, dupla drenagem, k, e, a<sub>v</sub> dados</h4>
+          <p>c<sub>v</sub> = 3,45·10⁻⁷·4/(6·10⁻⁴·10⁴) = 2,3·10⁻⁷ m²/s (≈ 7,3 m²/ano). H<sub>d</sub> = 2 m.</p>
+          <p class="ans">a) <b>2,3·10⁻⁷ m²/s</b> · b) t<sub>50</sub> ≈ <b>40 dias</b> · c) 90 dias: T = 0,447, U = 73% → <b>36,5 cm</b> · d) 0,02·4·log(t/t<sub>p</sub>) → <b>8, 16 e 24 cm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.9</div>
+        <div>
+          <h4>10 cm totais, 6 m, dupla drenagem, c<sub>v</sub> = 2,5·10⁻⁴ cm²/s</h4>
+          <p>H<sub>d</sub> = 300 cm → t = T·300²/2,5·10⁻⁴ s.</p>
+          <p class="ans">1 cm (U = 10%): <b>33 dias</b> · 5 cm (50%): <b>821 dias</b> · 8 cm (80%): <b>2 363 dias</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.10</div>
+        <div>
+          <h4>0,15 m totais, 0,05 m em 3 meses; quando dá 0,12 m?</h4>
+          <p>U = 33% → T = 0,0873. U = 80% → T = 0,567 (passou de 60%, sem atalho).</p>
+          <p class="ans">t = 3·0,567/0,0873 ≈ <b>19,5 meses</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.11</div>
+        <div>
+          <h4>6 m entre areias, c<sub>v</sub> = 4,92·10⁻⁸ m²/s</h4>
+          <p class="ans">t<sub>50</sub> = 0,197·9/4,92·10⁻⁸ s ≈ <b>417 dias</b> · t<sub>70</sub> = 0,403·9/4,92·10⁻⁸ s ≈ <b>853 dias</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">11.12</div>
+        <div>
+          <h4>Torres A e B a 40 m</h4>
+          <p>A: argila de −2 a −6 (H = 4 m); σ′<sub>0</sub>(−4) = 1,8·2 + 0,6·2 = 4,8 tf/m² = σ′<sub>a</sub> → NA. B: argila de −2 a −8 (H = 6 m); σ′<sub>0</sub>(−5) = 5,4 = σ′<sub>a</sub> → NA. Dupla drenagem.</p>
+          <p class="ans">a) ρ<sub>A</sub> = 34,4 cm, ρ<sub>B</sub> = 31,0 cm → <b>Δ ≈ 3,4 cm</b> (δ ≈ 1/1175)</p>
+          <p class="ans">b) 3 anos: T<sub>A</sub> = 0,189 (U = 49%, 16,9 cm), T<sub>B</sub> = 0,021 (U = 16%, 5,1 cm) → <b>Δ ≈ 11,8 cm</b> (δ ≈ 1/340)</p>
+          <p class="muted">O diferencial durante o adensamento é bem maior que o final e chega perto de 1/300, onde começam as fissuras.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    Baseado nas Notas de Aula de Mecânica dos Solos II, Parte 1 (Prof. Dr. Agleison Ramos Omido, FAEN/UFGD). As respostas foram calculadas a partir dos enunciados e perfis das notas; confira os passos com o que foi feito em sala.
+  </footer>
+</main>
