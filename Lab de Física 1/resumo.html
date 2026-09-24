@@ -1,0 +1,764 @@
+<title>Resumão Lab Física I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+    svg: { fontCache: 'global' },
+    options: { enableMenu: false }
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js" async></script>
+<style>
+  :root {
+    --bg: #f3f4f1;
+    --surface: #ffffff;
+    --ink: #1c2126;
+    --muted: #5a6470;
+    --line: #d7dbd5;
+    --accent: #4b4f9e;
+    --accent-soft: #e7e8f5;
+    --sand: #a5761f;
+    --sand-soft: #f6eedd;
+    --warn: #ad4430;
+    --warn-soft: #f7e6e1;
+    --ok: #3d7a4f;
+    --strata-1: #c9b58a;
+    --strata-2: #d8c27c;
+    --strata-3: #7f8b95;
+    --strata-4: #4b5258;
+    --font-display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Source Sans 3", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #121619;
+      --surface: #1a2024;
+      --ink: #e5e8ea;
+      --muted: #9aa5ae;
+      --line: #2d353b;
+      --accent: #a9adf0;
+      --accent-soft: #23253d;
+      --sand: #d9ad56;
+      --sand-soft: #2b2518;
+      --warn: #e4836c;
+      --warn-soft: #34201b;
+      --ok: #7cc293;
+      --strata-1: #8e7d58;
+      --strata-2: #a38f4f;
+      --strata-3: #58636c;
+      --strata-4: #353b40;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #121619;
+    --surface: #1a2024;
+    --ink: #e5e8ea;
+    --muted: #9aa5ae;
+    --line: #2d353b;
+    --accent: #a9adf0;
+    --accent-soft: #23253d;
+    --sand: #d9ad56;
+    --sand-soft: #2b2518;
+    --warn: #e4836c;
+    --warn-soft: #34201b;
+    --ok: #7cc293;
+    --strata-1: #8e7d58;
+    --strata-2: #a38f4f;
+    --strata-3: #58636c;
+    --strata-4: #353b40;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.55;
+    padding-inline: 18px;
+    padding-block: 0 64px;
+  }
+  .wrap { max-width: 860px; margin-inline: auto; }
+
+  /* Cabeçalho */
+  header.top { padding-block: 36px 20px; display: grid; gap: 10px; }
+  .eyebrow {
+    font-family: var(--font-display);
+    font-stretch: 85%;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-stretch: 78%;
+    font-weight: 800;
+    font-size: clamp(34px, 7vw, 52px);
+    line-height: 1.02;
+    margin: 0;
+    text-wrap: balance;
+  }
+  .lede { margin: 0; color: var(--muted); max-width: 62ch; }
+  .strata { display: grid; grid-template-columns: 1fr 2fr 3fr 1fr; height: 8px; border-radius: 2px; overflow: hidden; margin-top: 8px; }
+  .strata span:nth-child(1) { background: var(--strata-1); }
+  .strata span:nth-child(2) { background: var(--strata-2); }
+  .strata span:nth-child(3) { background: var(--strata-3); }
+  .strata span:nth-child(4) { background: var(--strata-4); }
+  .mm { height: 40px; margin-top: 8px; border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent); border-radius: 2px;
+    background-color: var(--surface);
+    background-image:
+      linear-gradient(color-mix(in srgb, var(--accent) 40%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--accent) 40%, transparent) 1px, transparent 1px),
+      linear-gradient(color-mix(in srgb, var(--accent) 14%, transparent) 1px, transparent 1px),
+      linear-gradient(90deg, color-mix(in srgb, var(--accent) 14%, transparent) 1px, transparent 1px);
+    background-size: 40px 40px, 40px 40px, 4px 4px, 4px 4px; }
+  .strata-legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 13px; color: var(--muted); font-family: var(--font-mono); }
+
+  /* Navegação */
+  nav.toc {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    margin-inline: -18px;
+    padding: 10px 18px;
+  }
+  nav.toc ul { list-style: none; margin: 0 auto; padding: 0; display: flex; gap: 8px; overflow-x: auto; max-width: 860px; scrollbar-width: thin; }
+  nav.toc a {
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-stretch: 85%;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 5px 11px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--surface);
+  }
+  nav.toc a:hover { border-color: var(--accent); color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* Seções */
+  section { padding-block: 34px 6px; scroll-margin-top: 64px; }
+  h2 {
+    font-family: var(--font-display);
+    font-stretch: 80%;
+    font-weight: 800;
+    font-size: clamp(26px, 5vw, 34px);
+    line-height: 1.1;
+    margin: 0 0 6px;
+    text-wrap: balance;
+  }
+  h2 .cap { display: block; font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); font-stretch: 90%; margin-bottom: 4px; }
+  h3 {
+    font-family: var(--font-display);
+    font-stretch: 88%;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 26px 0 8px;
+    text-wrap: balance;
+  }
+  p { margin: 0 0 12px; max-width: 68ch; }
+  ul, ol { margin: 0 0 14px; padding-left: 22px; max-width: 70ch; }
+  li { margin-bottom: 5px; }
+  strong { font-weight: 700; }
+  .muted { color: var(--muted); }
+  .mono { font-family: var(--font-mono); font-size: 0.92em; }
+
+  /* Fórmulas */
+  .eq {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 0 14px;
+    overflow-x: auto;
+  }
+  .eq.key { border-color: var(--sand); background: var(--sand-soft); }
+  .eq .lbl {
+    display: block;
+    font-family: var(--font-display);
+    font-stretch: 85%;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 2px;
+  }
+  .eq p { margin: 4px 0; }
+  mjx-container[display="true"] { margin: 6px 0 !important; overflow-x: auto; overflow-y: hidden; max-width: 100%; }
+
+  .cases { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 12px 0 16px; }
+  .case { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; display: grid; gap: 4px; align-content: start; }
+  .case h4 { margin: 0; font-family: var(--font-display); font-stretch: 88%; font-size: 16px; font-weight: 700; }
+  .case .when { font-size: 14px; color: var(--muted); margin: 0; }
+
+  /* Tabelas */
+  .table-wrap { overflow-x: auto; margin: 10px 0 16px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; font-variant-numeric: tabular-nums; }
+  th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  th { font-family: var(--font-display); font-stretch: 88%; font-weight: 700; font-size: 14px; color: var(--muted); background: var(--bg); white-space: nowrap; }
+  td.num, th.num { text-align: right; font-family: var(--font-mono); font-size: 14px; }
+  table.map td:first-child { width: 58%; }
+  table.map td:first-child div { margin-top: 4px; }
+
+  .pri { display: inline-block; font-family: var(--font-display); font-stretch: 85%; font-weight: 700; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
+  .pri.max { background: var(--warn-soft); color: var(--warn); }
+  .pri.alta { background: var(--sand-soft); color: var(--sand); }
+  .pri.media { background: var(--accent-soft); color: var(--accent); }
+  .pri.baixa { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+
+  /* Roteiro */
+  ol.steps { list-style: none; padding: 0; counter-reset: s; display: grid; gap: 10px; max-width: none; }
+  ol.steps li { counter-increment: s; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: start; margin: 0; }
+  ol.steps li::before {
+    content: counter(s);
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: 15px;
+    width: 30px; height: 30px;
+    display: grid; place-items: center;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50%;
+  }
+  ol.steps li div { padding-top: 2px; }
+
+  /* Avisos */
+  .trap { background: var(--warn-soft); border: 1px solid color-mix(in srgb, var(--warn) 35%, transparent); border-radius: 6px; padding: 12px 16px; margin: 12px 0 16px; }
+  .trap .lbl { font-family: var(--font-display); font-stretch: 85%; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warn); display: block; margin-bottom: 4px; }
+  .trap p:last-child, .trap ul:last-child { margin-bottom: 0; }
+  .tip { background: var(--accent-soft); border-radius: 6px; padding: 12px 16px; margin: 12px 0 16px; }
+  .tip .lbl { font-family: var(--font-display); font-stretch: 85%; font-weight: 700; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); display: block; margin-bottom: 4px; }
+  .tip p:last-child, .tip ul:last-child { margin-bottom: 0; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 16px; padding: 0; list-style: none; max-width: none; }
+  .chips li { margin: 0; font-family: var(--font-mono); font-size: 13.5px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 4px 9px; }
+
+  /* Diagrama */
+  figure { margin: 14px 0 18px; }
+  .diagram { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 8px; overflow-x: auto; }
+  .diagram svg { display: block; width: 100%; height: auto; }
+  .diagram .ax { stroke: var(--muted); stroke-width: 1.5; fill: none; }
+  .diagram .curve { stroke: var(--accent); stroke-width: 3; fill: none; }
+  .diagram .ext { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 5 5; fill: none; opacity: 0.7; }
+  .diagram .guide { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; fill: none; }
+  .diagram .unload { stroke: var(--sand); stroke-width: 2; stroke-dasharray: 7 5; fill: none; }
+  .diagram .pt { fill: var(--warn); }
+  .diagram .pta { fill: var(--sand); }
+  .diagram text { fill: var(--ink); font-family: var(--font-body); font-size: 16px; }
+  .diagram text.small { fill: var(--muted); font-size: 15px; }
+  .diagram text.lab { font-family: var(--font-mono); font-size: 15px; }
+  figcaption { font-size: 14px; color: var(--muted); margin-top: 6px; max-width: 68ch; }
+
+  /* Gabarito */
+  .ex-list { display: grid; gap: 10px; margin: 8px 0 18px; }
+  .ex { display: grid; grid-template-columns: 52px 1fr; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+  .ex > div, .case, ol.steps li, ol.steps li div { min-width: 0; }
+  ol.steps li div { overflow-wrap: anywhere; }
+  .ex-id { font-family: var(--font-mono); font-weight: 500; font-size: 14px; color: var(--accent); padding-top: 2px; }
+  .ex h4 { margin: 0 0 4px; font-family: var(--font-display); font-stretch: 88%; font-weight: 700; font-size: 16px; }
+  .ex p { margin: 0 0 6px; font-size: 15.5px; }
+  .ex p:last-child { margin-bottom: 0; }
+  .ans { font-weight: 600; }
+  .ans b { font-family: var(--font-mono); font-weight: 500; color: var(--ok); }
+  .ex .flag { color: var(--warn); font-size: 14.5px; }
+
+  footer { margin-top: 40px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+
+  @media (max-width: 520px) {
+    body { font-size: 16px; padding-inline: 16px; }
+    nav.toc { margin-inline: -16px; padding-inline: 16px; }
+    .ex { grid-template-columns: 1fr; gap: 2px; }
+    ol.steps li { grid-template-columns: 30px 1fr; gap: 10px; }
+  }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">FACET · UFGD · Prof. Dr. José Ezequiel de Souza</div>
+    <h1>Laboratório de Física I</h1>
+    <p class="lede">Resumo dos Roteiros 1 a 6: algarismos significativos, média e desvio padrão, propagação de erros, tabelas e gráficos, Método Direto, instrumentos e linearização. No final, a Atividade de Revisão resolvida e as respostas das Listas 1 a 6.</p>
+    <div class="mm" aria-hidden="true"></div>
+    <div class="strata-legend" aria-hidden="true"><span>papel milimetrado</span></div>
+  </header>
+</div>
+
+<nav class="toc" aria-label="Seções">
+  <ul>
+    <li><a href="#mapa">Mapa da prova</a></li>
+    <li><a href="#calculadora">Calculadora</a></li>
+    <li><a href="#algarismos">Algarismos significativos</a></li>
+    <li><a href="#desvio">Média e desvio</a></li>
+    <li><a href="#propagacao">Propagação de erros</a></li>
+    <li><a href="#graficos">Tabelas e gráficos</a></li>
+    <li><a href="#metodo-direto">Método Direto</a></li>
+    <li><a href="#instrumentos">Instrumentos</a></li>
+    <li><a href="#linearizacao">Linearização</a></li>
+    <li><a href="#pegadinhas">Pegadinhas</a></li>
+    <li><a href="#revisao">Revisão resolvida</a></li>
+    <li><a href="#listas">Listas</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+  <!-- MAPA -->
+  <section id="mapa">
+    <h2>Mapa da prova</h2>
+    <p>A Atividade de Revisão lista os temas da prova: valor médio e desvio padrão, algarismos significativos, propagação de erros, tabelas e gráficos, linearização e medidas físicas. As quatro questões dela quase certamente são o modelo da prova.</p>
+    <div class="table-wrap">
+      <table class="map">
+        <thead><tr><th>Tema e prioridade</th><th>Onde está</th></tr></thead>
+        <tbody>
+          <tr><td><span class="pri max">Máxima</span><div>Média, desvio médio, desvio padrão amostral e notação (x ± dp) com arredondamento certo</div></td><td>Roteiro 2 · Lista 2 · Revisão q. 1 e 4</td></tr>
+          <tr><td><span class="pri max">Máxima</span><div>Propagação de erros: volume de cilindro e esfera, densidade, massa</div></td><td>Roteiro 2 (Tabela 3) · Listas 2 e 5 · Revisão q. 4</td></tr>
+          <tr><td><span class="pri max">Máxima</span><div>Método Direto: coeficientes angular e linear com desvio</div></td><td>Roteiro 4 · Lista 4 · Revisão q. 2</td></tr>
+          <tr><td><span class="pri alta">Alta</span><div>Linearização: trocar variável (P × 1/V, y² × x), monolog (exponencial), dilog (potência)</div></td><td>Roteiro 6 · Listas 3 e 6 · Revisão q. 2 e 3</td></tr>
+          <tr><td><span class="pri alta">Alta</span><div>Algarismos significativos: contar, operar, mudar unidade</div></td><td>Roteiro 1 · Listas 1 e 2</td></tr>
+          <tr><td><span class="pri media">Média</span><div>Montar tabela e gráfico em papel milimetrado (escala, barras de erro, melhor reta)</div></td><td>Roteiro 3 · Lista 3</td></tr>
+          <tr><td><span class="pri media">Média</span><div>Paquímetro, balança, incerteza de instrumento analógico e digital</div></td><td>Roteiro 5 · Revisão q. 4h</td></tr>
+          <tr><td><span class="pri baixa">Pergunta curta</span><div>Tipos de erro, precisão × exatidão, unidades do SI</div></td><td>Roteiros 1 e 5</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CALCULADORA -->
+  <section id="calculadora">
+    <h2>Antes de tudo: a calculadora</h2>
+    <div class="trap">
+      <span class="lbl">O professor diz que isso economiza a prova</span>
+      <ul>
+        <li>Aprenda o <strong>modo estatístico</strong> (STAT ou SD) da sua calculadora: você digita os valores e ela dá a média e o desvio padrão.</li>
+        <li>Use o desvio <strong>amostral</strong>, que divide por n − 1. Na calculadora ele aparece como <span class="mono">sx</span>, <span class="mono">s</span> ou <span class="mono">σn−1</span>. O <span class="mono">σx</span> ou <span class="mono">σn</span> é o populacional e <strong>não</strong> é o que a disciplina usa.</li>
+        <li>O <strong>desvio médio</strong> a calculadora não dá: some os |dᵢ| e divida por n.</li>
+        <li>Propagação com seno ou cosseno: o Δθ entra em <strong>radianos</strong> (Δθ × π/180).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ALGARISMOS -->
+  <section id="algarismos">
+    <h2><span class="cap">Roteiro 1</span>Erros e algarismos significativos</h2>
+    <div class="cases">
+      <div class="case">
+        <h4>Erro grosseiro</h4>
+        <p class="when">Inabilidade ou engano: ler errado, contar oscilação errada, técnica ruim. Some com atenção.</p>
+      </div>
+      <div class="case">
+        <h4>Erro sistemático</h4>
+        <p class="when">Fonte identificável, sempre no mesmo sentido: calibração, relógio que atrasa, paralaxe, temperatura diferente da calibração. Estraga a <strong>exatidão</strong>. Pode ser eliminado ou compensado.</p>
+      </div>
+      <div class="case">
+        <h4>Erro aleatório</h4>
+        <p class="when">Ora pra mais, ora pra menos, imprevisível: estimar fração da escala, rede elétrica oscilando. Nunca some; só diminui com mais medidas. É o que a estatística trata.</p>
+      </div>
+    </div>
+    <p><strong>Precisão</strong> = medidas próximas entre si (só flutuação aleatória). <strong>Exatidão (acurácia)</strong> = perto do valor verdadeiro; exige precisão <em>e</em> erro sistemático pequeno.</p>
+
+    <div class="eq key">
+      <span class="lbl">Regra dos algarismos significativos</span>
+      <p>São os algarismos <strong>corretos + o primeiro duvidoso</strong>, e mais nenhum. Conta-se da esquerda para a direita a partir do <strong>primeiro não nulo</strong>.</p>
+      <p>0,0650 kg → 3 AS (os zeros da esquerda não contam; o zero final conta). 2,850×10³ m → 4 AS. 60,0×10⁻⁴ kg → 3 AS.</p>
+      <p><strong>Mudar de unidade não muda o número de AS.</strong> 3,5 m não é 350 cm (3 AS); escreva 3,5×10² cm.</p>
+    </div>
+    <div class="eq">
+      <span class="lbl">Incerteza de uma medida única</span>
+      <p><strong>Absoluta:</strong> metade da menor divisão em instrumento analógico (régua, cronômetro de ponteiro); a própria menor divisão em display digital.</p>
+      <p><strong>Relativa:</strong> \( \dfrac{\Delta x}{x} \), geralmente em %. Quanto menor, melhor a medida. Ex.: (6,8 ± 0,1) cm → 0,1/6,8 = 1,5%.</p>
+    </div>
+  </section>
+
+  <!-- DESVIO -->
+  <section id="desvio">
+    <h2><span class="cap">Roteiro 2</span>Valor médio e desvio padrão</h2>
+    <div class="eq key">
+      \[ V_m = \frac{\sum V_i}{n} \qquad d_i = |V_m - V_i| \qquad d_m = \frac{\sum d_i}{n} \qquad d_p = \pm\sqrt{\frac{\sum d_i^{\,2}}{n-1}} \]
+      <p class="muted">Desvio padrão amostral (n − 1) é o padrão da disciplina. Desvio padrão da média, se pedirem: \( d_{pm} = d_p/\sqrt{n} \).</p>
+    </div>
+    <div class="tip">
+      <span class="lbl">Como escrever o resultado</span>
+      <ol>
+        <li>Arredonde o <strong>dp para 1 algarismo significativo</strong>.</li>
+        <li>A <strong>casa decimal desse algarismo</strong> é onde a média para.</li>
+        <li>Escreva \( x = (V_m \pm d_p) \) unidade.</li>
+        <li>Se o dp sair <strong>menor que a incerteza do instrumento</strong>, use a do instrumento.</li>
+      </ol>
+      <p>Exemplo do roteiro: V<sub>m</sub> = 15,031 cm e d<sub>p</sub> = 0,0398 cm → d<sub>p</sub> = 0,04 (2ª casa) → <strong>L = (15,03 ± 0,04) cm</strong>.</p>
+    </div>
+
+    <h3>Operações com algarismos significativos</h3>
+    <div class="cases">
+      <div class="case">
+        <h4>Soma e subtração</h4>
+        <p class="when">O resultado fica com a <strong>menor quantidade de casas decimais</strong> entre as parcelas. Ex.: 81,572 + 710 + 24,3 = 815,872 → <strong>816</strong>.</p>
+      </div>
+      <div class="case">
+        <h4>Multiplicação e divisão</h4>
+        <p class="when">O resultado fica com a <strong>menor quantidade de AS</strong> entre os fatores. Ex.: 5,74 × 8,7 = 49,938 → <strong>50</strong>. 4,9 ÷ 3,14 → <strong>1,6</strong>.</p>
+      </div>
+      <div class="case">
+        <h4>Arredondamento</h4>
+        <p class="when">Primeiro algarismo desprezado ≥ 5 → sobe 1. Arredonde <strong>só no resultado final</strong>, nunca no meio da conta. Constantes (π, e) com o máximo de casas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPAGAÇÃO -->
+  <section id="propagacao">
+    <h2><span class="cap">Roteiro 2 · Tabela 3</span>Propagação de erros</h2>
+    <p>Vem do diferencial total: \( \Delta Z = \left|\dfrac{\partial f}{\partial x}\right|\Delta x + \left|\dfrac{\partial f}{\partial y}\right|\Delta y + \dots \). O professor quer que você use a tabela, não que derive. Soma, subtração, multiplicação e divisão ele pede pra <strong>decorar</strong>.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Operação</th><th>Valor</th><th>Incerteza ΔZ</th></tr></thead>
+        <tbody>
+          <tr><td>Soma</td><td>\( x + y \)</td><td>\( \Delta x + \Delta y \)</td></tr>
+          <tr><td>Subtração</td><td>\( x - y \)</td><td>\( \Delta x + \Delta y \) (soma também!)</td></tr>
+          <tr><td>Multiplicação</td><td>\( x\,y \)</td><td>\( x\,\Delta y + y\,\Delta x \)</td></tr>
+          <tr><td>Por constante</td><td>\( c\,x \)</td><td>\( c\,\Delta x \)</td></tr>
+          <tr><td>Divisão</td><td>\( x/y \)</td><td>\( \dfrac{x\,\Delta y + y\,\Delta x}{y^2} \)</td></tr>
+          <tr><td>Potência</td><td>\( x^n \)</td><td>\( n\,x^{n-1}\,\Delta x \)</td></tr>
+          <tr><td>Raiz</td><td>\( \sqrt{x} \)</td><td>\( \dfrac{\Delta x}{2\sqrt{x}} \)</td></tr>
+          <tr><td>Exponencial</td><td>\( c^x \)</td><td>\( c^x \ln(c)\,\Delta x \)</td></tr>
+          <tr><td>Logaritmo</td><td>\( \log_c x \)</td><td>\( \dfrac{\log_c(e)}{x}\,\Delta x \)</td></tr>
+          <tr><td>Seno</td><td>\( \mathrm{sen}\,x \)</td><td>\( \cos x\,\Delta x \) (Δx em rad)</td></tr>
+          <tr><td>Cosseno</td><td>\( \cos x \)</td><td>\( \mathrm{sen}\,x\,\Delta x \) (Δx em rad)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>As fórmulas que caem (Lista 5 e Revisão)</h3>
+    <div class="eq key">
+      <span class="lbl">Esfera (só se mede o diâmetro)</span>
+      \[ V = \frac{\pi}{6}D^3 \qquad \delta V = \frac{\pi}{2}\,D^2\,\delta D \]
+      <span class="lbl">Cilindro</span>
+      \[ V = \frac{\pi}{4}D^2 h \qquad \delta V = \frac{\pi}{4}\left(2Dh\,\delta D + D^2\,\delta h\right) \]
+      <span class="lbl">Cilindro vazado (D externo, d interno)</span>
+      \[ V = \frac{\pi}{4}(D^2 - d^2)\,h \qquad \delta V = \frac{\pi}{4}\left[2Dh\,\delta D + 2dh\,\delta d + (D^2 - d^2)\,\delta h\right] \]
+      <span class="lbl">Massa e densidade</span>
+      \[ m = \rho V \Rightarrow \delta m = \rho\,\delta V + V\,\delta\rho \qquad \rho = \frac{m}{V} \Rightarrow \delta\rho = \frac{m\,\delta V + V\,\delta m}{V^2} \]
+    </div>
+    <p class="muted">Como montar qualquer uma: quebre em operações da tabela. Ex. do cilindro: D² é potência (2D·δD), vezes h é multiplicação (D²·δh + h·2DδD), vezes π/4 é constante.</p>
+  </section>
+
+  <!-- GRÁFICOS -->
+  <section id="graficos">
+    <h2><span class="cap">Roteiro 3</span>Tabelas e gráficos</h2>
+    <h3>Tabela</h3>
+    <ul>
+      <li>Título em cima, descrevendo o que a tabela mostra.</li>
+      <li>No topo de cada coluna: símbolo, e entre parênteses a unidade com a potência de 10. Ex.: <span class="mono">(x ± 2)(10⁻² m)</span>. Números de preferência inteiros.</li>
+      <li>Incerteza igual pra todos os valores → vai no cabeçalho. Diferente pra cada → vai junto de cada valor.</li>
+    </ul>
+    <h3>Gráfico em papel milimetrado (18 cm × 27 cm)</h3>
+    <ol class="steps">
+      <li><div><strong>Eixos:</strong> variável independente no x, dependente no y. Se y = f(x), x é a independente.</div></li>
+      <li><div><strong>Qual eixo no lado maior (27 cm):</strong> se o zero importa, a variável de maior valor final; se não, a de maior variação.</div></li>
+      <li><div><strong>Escala por regra de três:</strong> maior valor ÷ tamanho do eixo. Deu fracionário, arredonde <strong>pra cima</strong> num valor fácil. Ex.: 80 m em 27 cm → 2,96 → 3 m por cm.</div></li>
+      <li><div><strong>Marque a escala nos eixos</strong>, não os valores de cada ponto (a não ser pontos de interesse).</div></li>
+      <li><div><strong>Barras de erro:</strong> uma cruz com o tamanho dos desvios em x e em y. Se for pequena demais pra escala, um círculo em volta do ponto.</div></li>
+      <li><div><strong>Melhor curva:</strong> não liga ponto a ponto. Passa pelo máximo de pontos e deixa quantidades parecidas de cada lado. Não é a reta do primeiro ao último ponto.</div></li>
+    </ol>
+    <p class="muted">Incluir (0; 0) só se ele fizer parte da lei física. Em s × t de queda livre (s = 4,9t²), faz. Em v × t, não: a reta corta o eixo em v₀ ≠ 0.</p>
+  </section>
+
+  <!-- MÉTODO DIRETO -->
+  <section id="metodo-direto">
+    <h2><span class="cap">Roteiro 4</span>Gráfico linear e Método Direto</h2>
+    <p>Reta \( y = ax + b \). O <strong>coeficiente angular a = Δy/Δx tem unidade</strong> (não é a tangente do ângulo do desenho, que muda com a escala). O <strong>coeficiente linear b</strong> é o y quando x = 0.</p>
+    <div class="eq key">
+      <span class="lbl">Método Direto: cada par de pontos (i, j) dá uma reta</span>
+      \[ a_{ij} = \frac{y_j - y_i}{x_j - x_i} \qquad b_{ij} = \frac{x_j\,y_i - x_i\,y_j}{x_j - x_i} \]
+      <p>Com N pontos saem \( N(N-1)/2 \) pares: 3 pontos → 3 pares; 4 pontos → 6 pares. O resultado é a <strong>média</strong> dos a<sub>ij</sub> e dos b<sub>ij</sub>, e a incerteza é o <strong>desvio padrão amostral</strong> de cada lista.</p>
+      \[ y = (\bar a \pm d_{p,a})\,x + (\bar b \pm d_{p,b}) \]
+    </div>
+    <div class="tip">
+      <span class="lbl">Exemplo do roteiro (4 pontos)</span>
+      <p>(1,00; 5,00), (1,50; 6,05), (3,50; 9,95), (5,00; 13,10) → 6 pares → ā = 2,028, d<sub>p,a</sub> = 0,062; b̄ = 2,94, d<sub>p,b</sub> = 0,18 → <strong>y = (2,03 ± 0,06)x + (2,9 ± 0,2)</strong>.</p>
+      <p>Organize numa tabela com colunas par (i, j), a<sub>ij</sub>, b<sub>ij</sub>, e use o modo estatístico nas duas colunas.</p>
+    </div>
+    <p class="muted">Extrapolação é prolongar a reta pra fora dos dados. Só vale se a lei continuar linear. A árvore da Lista 4 mostra como dá errado.</p>
+  </section>
+
+  <!-- INSTRUMENTOS -->
+  <section id="instrumentos">
+    <h2><span class="cap">Roteiro 5</span>Instrumentos de medida</h2>
+    <h3>Paquímetro</h3>
+    <ul>
+      <li>Mede externo (orelhas grandes), interno (orelhas pequenas) e profundidade (haste).</li>
+      <li><strong>Nônio de décimos:</strong> 10 divisões do nônio = 9 mm da escala principal, então cada traço vale 0,1 mm.</li>
+      <li><strong>Leitura:</strong> milímetros inteiros da escala principal antes do zero do nônio + (número do traço do nônio que coincide com um traço da principal) × 0,1 mm. Ex. do roteiro: 2 mm + traço 7 → <strong>(2,70 ± 0,05) mm</strong>.</li>
+      <li><strong>Incerteza:</strong> metade da menor divisão no analógico (0,05 mm num nônio de 0,1). No digital, a menor divisão do display (0,01 mm).</li>
+      <li>Cuidados: contato suave, instrumento reto em relação à peça, peça limpa, olhar perpendicular à escala (paralaxe).</li>
+    </ul>
+    <h3>Balança do laboratório</h3>
+    <p>Três escalas (100 em 100 g, 10 em 10 g, 0,2 em 0,2 g). Antes de medir: <strong>nivelar</strong> (bolha entre as marcas) e <strong>zerar</strong> (braço na horizontal com contrapesos no zero). Lê da escala maior para a menor e soma.</p>
+    <h3>SI: 7 grandezas básicas</h3>
+    <p>Comprimento (m) · massa (kg) · tempo (s) · corrente (A) · temperatura (K) · quantidade de matéria (mol) · intensidade luminosa (cd).</p>
+  </section>
+
+  <!-- LINEARIZAÇÃO -->
+  <section id="linearizacao">
+    <h2><span class="cap">Roteiro 6</span>Linearização de curvas</h2>
+    <p>Curva não linear → troque a variável ou use papel log até virar reta. Aí o Método Direto funciona de novo.</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Lei</th><th>Grafique</th><th>Vira a reta</th><th>Como tirar as constantes</th></tr></thead>
+        <tbody>
+          <tr><td>\( P = \dfrac{k}{V} \)</td><td>P × 1/V (milimetrado)</td><td>\( P = k\,(1/V) \)</td><td>k = inclinação</td></tr>
+          <tr><td>\( y = B\sqrt{x} \)</td><td>y² × x (milimetrado)</td><td>\( y^2 = B^2 x \)</td><td>B = √(inclinação)</td></tr>
+          <tr><td>\( y = m\,e^{nx} \)</td><td>y × x em <strong>monolog</strong></td><td>\( \ln y = \ln m + n\,x \)</td><td>\( n = \dfrac{\ln y_2 - \ln y_1}{x_2 - x_1} \); m = y lido em x = 0</td></tr>
+          <tr><td>\( y = m\,x^n \)</td><td>y × x em <strong>dilog</strong></td><td>\( \log y = \log m + n\log x \)</td><td>\( n = \dfrac{\log y_2 - \log y_1}{\log x_2 - \log x_1} \); m = y lido em x = 1</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <ul>
+      <li><strong>Monolog:</strong> eixo horizontal comum, vertical logarítmico (ciclos de potência de 10). Você marca os valores de y direto, sem calcular log.</li>
+      <li><strong>Dilog:</strong> os dois eixos logarítmicos.</li>
+      <li>Para \( y = A\,e^{-t/\tau} \): a inclinação no monolog é \( n = -1/\tau \), então \( \tau = -1/n \); A é o y em t = 0.</li>
+      <li>Inclinação no dilog = o expoente. Se der 0,5, a lei é raiz; se der 1/3, é raiz cúbica.</li>
+    </ul>
+  </section>
+
+  <!-- PEGADINHAS -->
+  <section id="pegadinhas">
+    <h2>Pegadinhas</h2>
+    <div class="trap">
+      <span class="lbl">Confira antes de entregar</span>
+      <ul>
+        <li>Desvio padrão <strong>amostral</strong> (n − 1), não populacional.</li>
+        <li>O dp tem <strong>1 algarismo significativo</strong> e manda na casa decimal da média. Nada de “9,778 ± 0,126”.</li>
+        <li>Na <strong>subtração</strong>, os erros <strong>somam</strong>.</li>
+        <li>dp menor que a incerteza do instrumento → use a do instrumento.</li>
+        <li>Seno e cosseno: Δθ em <strong>radianos</strong>.</li>
+        <li>Unidade sempre, e com a potência de 10 certa. bar·cm³ = 0,1 J.</li>
+        <li>Soma e subtração: menor número de <strong>casas decimais</strong>. Multiplicação e divisão: menor número de <strong>algarismos significativos</strong>.</li>
+        <li>Arredonde só no final.</li>
+        <li>Coeficiente angular tem unidade; coeficiente linear tem a unidade de y.</li>
+        <li>Digital: incerteza = menor divisão. Analógico: metade da menor divisão.</li>
+      </ul>
+    </div>
+    <h3>Erros nos enunciados</h3>
+    <div class="tip">
+      <ul>
+        <li><strong>Lista 2, q. 7:</strong> a fórmula dada é V = πD²/6, mas o volume da esfera é <strong>πD³/6</strong>.</li>
+        <li><strong>Revisão, q. 1:</strong> fala em “11 anos” e “dez anos”, mas a tabela tem <strong>10 medidas</strong> (2008 a 2017). Use n = 10.</li>
+        <li><strong>Roteiro 4:</strong> no exemplo, “b12 = 2,975” está com índice trocado; é b<sub>14</sub>.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- REVISÃO -->
+  <section id="revisao">
+    <h2>Atividade de Revisão resolvida</h2>
+    <p>Resolvi as contas e conferi em Python. Os gráficos em papel você precisa fazer à mão; aqui estão os valores e o que eles devem mostrar.</p>
+
+    <h3>Questão 1 · Tempos do Usain Bolt</h3>
+    <div class="ex-list">
+      <article class="ex">
+        <div class="ex-id">1</div>
+        <div>
+          <h4>Média, desvio médio, desvio padrão</h4>
+          <p>n = 10 · Σtᵢ = 97,78 s · Σdᵢ = 0,92 s · Σdᵢ² = 0,1426 s²</p>
+          <p class="ans">a) t<sub>m</sub> = <b>9,778 s</b> · b) d<sub>m</sub> = <b>0,092 s</b> · c) d<sub>p</sub> = √(0,1426/9) = <b>0,126 s</b></p>
+          <p class="ans">dp → 0,1 (1ª casa decimal) → <b>t = (9,8 ± 0,1) s</b></p>
+        </div>
+      </article>
+    </div>
+
+    <h3>Questão 2 · Gás no pistão (P × V)</h3>
+    <div class="ex-list">
+      <article class="ex">
+        <div class="ex-id">2a–c</div>
+        <div>
+          <h4>Tabela e gráficos</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th class="num">V (cm³)</th><th class="num">P (bar)</th><th class="num">1/V (10⁻³ cm⁻³)</th><th class="num">P·V (bar·cm³)</th></tr></thead>
+              <tbody>
+                <tr><td class="num">58,5</td><td class="num">46,6</td><td class="num">17,09</td><td class="num">2726</td></tr>
+                <tr><td class="num">80,7</td><td class="num">35,2</td><td class="num">12,39</td><td class="num">2841</td></tr>
+                <tr><td class="num">112,3</td><td class="num">25,5</td><td class="num">8,90</td><td class="num">2864</td></tr>
+                <tr><td class="num">180,4</td><td class="num">15,7</td><td class="num">5,54</td><td class="num">2832</td></tr>
+                <tr><td class="num">305,8</td><td class="num">9,2</td><td class="num">3,27</td><td class="num">2813</td></tr>
+                <tr><td class="num">479,2</td><td class="num">5,8</td><td class="num">2,09</td><td class="num">2779</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>P × V dá uma <strong>hipérbole</strong> (P cai com V). P × 1/V dá uma <strong>reta passando perto da origem</strong>, porque P = (nRT)·(1/V).</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">2d</div>
+        <div>
+          <h4>Número de mols com PV = nRT</h4>
+          <p>P·V médio ≈ 2809 bar·cm³. Como 1 bar·cm³ = 10⁵ Pa × 10⁻⁶ m³ = 0,1 J, P·V ≈ 280,9 J.</p>
+          <p class="ans">n = 280,9/(8,314 × 300) ≈ <b>0,113 mol</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">2e</div>
+        <div>
+          <h4>Método Direto com os 3 pontos de maior pressão (P × 1/V)</h4>
+          <p>Pontos (1/V; P): (0,017094; 46,6), (0,012392; 35,2), (0,008905; 25,5) → 3 pares.</p>
+          <p>a<sub>12</sub> = 2424, a<sub>13</sub> = 2577, a<sub>23</sub> = 2782 bar·cm³ · b<sub>12</sub> = 5,16, b<sub>13</sub> = 2,56, b<sub>23</sub> = 0,73 bar</p>
+          <p class="ans">a = <b>(2,6 ± 0,2)×10³ bar·cm³</b> · b = <b>(3 ± 2) bar</b> (compatível com zero, como a teoria prevê)</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">2f</div>
+        <div>
+          <h4>n ± Δn a partir do coeficiente angular</h4>
+          <p>a = nRT → n = a/(RT), e Δn = Δa/(RT) (divisão por constante). a = 259,4 J, Δa = 17,9 J.</p>
+          <p class="ans">n = <b>(0,104 ± 0,007) mol</b></p>
+        </div>
+      </article>
+    </div>
+
+    <h3>Questão 3 · y = B·x<sup>1/2</sup></h3>
+    <div class="ex-list">
+      <article class="ex">
+        <div class="ex-id">3</div>
+        <div>
+          <h4>Três gráficos e a constante B</h4>
+          <p>a) y × x: curva que cresce cada vez mais devagar (raiz). b) y² × x: <strong>reta pela origem</strong> com inclinação B² ≈ 100 (y² = 484, 1024, 1521, …, 5041). c) log y × log x: reta com inclinação ≈ <strong>0,51 ≈ 1/2</strong>, o expoente da lei.</p>
+          <p class="ans">d) Sim, pelo gráfico (b), com B = √(inclinação), e pelo (c), com B = y lido em x = 1. <b>B ≈ 10</b> (y/√x dá entre 9,8 e 10,1 em todos os pontos)</p>
+        </div>
+      </article>
+    </div>
+
+    <h3>Questão 4 · Moeda de 50 centavos</h3>
+    <div class="ex-list">
+      <article class="ex">
+        <div class="ex-id">4a</div>
+        <div>
+          <h4>d e h com média e desvio padrão</h4>
+          <p>d: média 22,962 mm, dp 0,077 mm. h: média 2,726 mm, dp 0,021 mm. Os dois dp são maiores que a incerteza do paquímetro digital (0,01 mm), então valem os dp.</p>
+          <p class="ans"><b>d = (22,96 ± 0,08) mm</b> · <b>h = (2,73 ± 0,02) mm</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">4b</div>
+        <div>
+          <h4>Fórmula do volume com erro</h4>
+          <p class="ans">\( V = \dfrac{\pi}{4}d^2h \qquad \delta V = \dfrac{\pi}{4}\left(2dh\,\delta d + d^2\,\delta h\right) \)</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">4c</div>
+        <div>
+          <h4>Volume em cm³</h4>
+          <p>d = 2,296 cm, δd = 0,008 cm, h = 0,273 cm, δh = 0,002 cm → V = 1,130 cm³, δV = 0,785 × (0,01003 + 0,01054) = 0,016 cm³.</p>
+          <p class="ans"><b>V = (1,13 ± 0,02) cm³</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">4d</div>
+        <div>
+          <h4>Massa com ρ = (7,9 ± 0,1) g/cm³</h4>
+          <p>m = 7,9 × 1,130 = 8,93 g · δm = ρδV + Vδρ = 7,9 × 0,016 + 1,130 × 0,1 = 0,24 g</p>
+          <p class="ans"><b>m = (8,9 ± 0,2) g</b></p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">4e–g</div>
+        <div>
+          <h4>Volume nominal, erro percentual e densidade do cuproníquel</h4>
+          <p class="ans">e) V<sub>nom</sub> = 7,81/7,85 = <b>0,995 cm³</b> · f) (0,995 − 1,130)/1,130 ≈ <b>−12%</b> (o nominal é 12% menor)</p>
+          <p class="ans">g) ρ = 9,25/0,995 ≈ <b>9,3 g/cm³</b> com o volume nominal (com o volume medido, 9,25/1,130 ≈ 8,2 g/cm³)</p>
+          <p class="muted">No item (g), “o mesmo volume” pode ser o nominal ou o medido. A massa oficial combina com o volume oficial, então 9,3 é a leitura mais provável. O cuproníquel real tem ≈ 8,9 g/cm³.</p>
+        </div>
+      </article>
+      <article class="ex">
+        <div class="ex-id">4h</div>
+        <div>
+          <h4>Massa de 8 g na balança de cozinha</h4>
+          <p>Display digital mostrando “8” → incerteza = menor divisão = 1 g. V = m/ρ = 8/7,9 = 1,013 cm³. δV = (m·δρ + ρ·δm)/ρ² = (8 × 0,1 + 7,9 × 1)/7,9² = 0,14 cm³.</p>
+          <p class="ans"><b>V = (1,0 ± 0,1) cm³</b> (a balança grosseira limita tudo a 2 algarismos)</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- LISTAS -->
+  <section id="listas">
+    <h2>Respostas das listas</h2>
+    <p>As listas não vieram com gabarito. Estas respostas são minhas, feitas com as regras dos roteiros. Itens que são só gráfico à mão ficam com o resultado esperado.</p>
+
+    <h3>Lista 1 · Ordem de grandeza e algarismos significativos</h3>
+    <div class="ex-list">
+      <article class="ex"><div class="ex-id">1</div><div><p class="ans">a) <b>5</b> · b) <b>3</b> · c) 53.000 cm → <b>5</b> como está escrito (ambíguo; por isso se usa potência de 10) · d) <b>4</b> · e) <b>3</b></p></div></article>
+      <article class="ex"><div class="ex-id">2</div><div><p class="ans">a) <b>2,50×10³ cm</b> · b) <b>44,50 kg</b> · c) <b>6,8 mm</b> · d) <b>3,000 m³</b> · e) <b>5,0×10⁻⁵ m³</b></p></div></article>
+      <article class="ex"><div class="ex-id">3</div><div><p>Incerteza no último algarismo de cada medida.</p><p class="ans">5,082 m: 0,001/5,082 ≈ <b>0,02%</b> · 5,1 m: 0,1/5,1 ≈ <b>2%</b></p></div></article>
+      <article class="ex"><div class="ex-id">4</div><div><p>Incerteza absoluta = metade da menor divisão do mostrador. As duas leituras têm a mesma incerteza absoluta, então a de <strong>maior velocidade</strong> tem incerteza relativa menor e é a de <strong>melhor qualidade</strong> (a do painel b).</p></div></article>
+      <article class="ex"><div class="ex-id">5</div><div><p>Escala: 0,1 m / 10⁹ m = 10⁻¹⁰.</p><p class="ans">a) raio da Terra no modelo = 10⁷ × 10⁻¹⁰ = <b>1 mm</b> · b) distância = 10¹¹ × 10⁻¹⁰ = <b>10 m</b></p></div></article>
+      <article class="ex"><div class="ex-id">6</div><div><p class="ans">a) 111,7×10⁶ ha = 1,117×10¹² m² → ÷ 20 m² ≈ <b>56 bilhões</b> de seringueiras · b) 8,51×10⁸ ha ÷ (27,9×10⁶ ha/década) ≈ <b>30 décadas</b></p></div></article>
+    </div>
+
+    <h3>Lista 2 · Média, desvio e propagação</h3>
+    <div class="ex-list">
+      <article class="ex"><div class="ex-id">1</div><div><p>n = 20 · ΣVᵢ = 369,30 m³ · Σdᵢ = 2,33 m³ · Σdᵢ² = 0,6153 m⁶</p><p class="ans">V<sub>m</sub> = <b>18,465 m³</b> · d<sub>m</sub> = <b>0,117 m³</b> · d<sub>p</sub> = <b>0,18 m³</b> → <b>V = (18,5 ± 0,2) m³</b></p></div></article>
+      <article class="ex"><div class="ex-id">2</div><div><p class="ans">a) <b>399,1 mm</b> · b) <b>80,1 m</b> · c) <b>97,988 N</b> · d) <b>25,883 g</b> · e) <b>679 g</b> · f) <b>8,8</b> · g) <b>2,7</b></p></div></article>
+      <article class="ex"><div class="ex-id">3</div><div><p>V = π·3,5²·22,6/4 = 217,4 cm³; D tem 2 AS.</p><p class="ans"><b>2,2×10² cm³</b></p></div></article>
+      <article class="ex"><div class="ex-id">4</div><div><p class="ans"><b>128 km/h</b> · <b>2,13 km/min</b> · <b>35,4 m/s</b></p></div></article>
+      <article class="ex"><div class="ex-id">5</div><div><p>Líquido: 1,102 × 1,0×10³ = 1,1×10³ g (2 AS por causa do 1,0 L).</p><p class="ans">184,1 + 1,1×10³ ≈ <b>1,3×10³ g</b></p></div></article>
+      <article class="ex"><div class="ex-id">6</div><div><p>Subtração: os erros somam.</p><p class="ans">392,4 ± 1,2 → <b>(392 ± 1) gf</b></p></div></article>
+      <article class="ex"><div class="ex-id">7</div><div><p>Use V = πD³/6. δV = (π/2)D²δD = 0,93 cm³.</p><p class="ans"><b>V = (21,5 ± 0,9) cm³</b></p></div></article>
+      <article class="ex"><div class="ex-id">8</div><div><p>δ(sen θ) = cos θ · Δθ, com Δθ = 0,5 × π/180 = 0,00873 rad.</p><p class="ans">sen 21° = 0,358 · δ = 0,934 × 0,00873 = 0,008 → <b>(0,358 ± 0,008)</b></p></div></article>
+    </div>
+
+    <h3>Lista 3 · Tabelas e gráficos</h3>
+    <div class="ex-list">
+      <article class="ex"><div class="ex-id">1</div><div>
+        <p>Nas duas tabelas, <strong>t é a independente</strong>.</p>
+        <p><strong>Tabela 1 (v × t):</strong> linear, v = at + b com a ≈ 10 m/s² (é a gravidade) e b ≈ 0,7 m/s. <strong>Não</strong> inclua (0; 0), porque em t = 0 a velocidade é v₀ ≈ 0,7 m/s.</p>
+        <p><strong>Tabela 2 (s × t):</strong> parábola, s = 4,9·t² (s/t² dá 4,9 em todos os pontos, queda livre com g/2). Aqui (0; 0) <strong>é</strong> válido.</p>
+      </div></article>
+      <article class="ex"><div class="ex-id">2</div><div><p>É o mesmo gás da Revisão q. 2: P × V hipérbole; P × 1/V reta com inclinação ≈ 2,8×10³ bar·cm³ e intercepto ≈ 0.</p></div></article>
+    </div>
+
+    <h3>Lista 4 · Método Direto</h3>
+    <div class="ex-list">
+      <article class="ex"><div class="ex-id">1</div><div><p>Pontos (t; s) em (10⁻¹ s; 10⁻² m): (30; 21), (50; 40), (70; 59), (90; 80) → 6 pares.</p><p class="ans">a = (0,98 ± 0,04)×10⁻¹ m/s · b = (−9 ± 3)×10⁻² m → <b>s(t) = (0,098 ± 0,004)·t − (0,09 ± 0,03)</b>, s em m e t em s</p></div></article>
+      <article class="ex"><div class="ex-id">2</div><div>
+        <p>Pontos (ano; altura): (1; 5), (2; 10), (3; 16), (4; 21) → a<sub>ij</sub> = 5,0; 5,5; 5,33; 6,0; 5,5; 5,0.</p>
+        <p class="ans">a) a = <b>(5,4 ± 0,4) m/ano</b> · b = −0,47 ± 1,00 → <b>(0 ± 1) m</b></p>
+        <p>b) a = taxa de crescimento em altura na fase juvenil; b = altura no ano zero (a muda, ≈ 0).</p>
+        <p class="ans">c) 2026 (9º ano): ≈ <b>48 m</b> · 2060 (43º ano): ≈ <b>231 m</b></p>
+        <p>e) A altura real em 2026 é 35 ± 6 m. A reta superestima porque o crescimento é sigmoide: na fase madura a árvore para de crescer. 231 m é absurdo (a maior árvore do mundo tem ~115 m). Extrapolar reta fora dos dados não vale.</p>
+      </div></article>
+    </div>
+
+    <h3>Lista 5 · Volumes e densidade</h3>
+    <div class="ex-list">
+      <article class="ex"><div class="ex-id">1</div><div><p>As três fórmulas (esfera, cilindro, cilindro vazado) estão na seção <a href="#propagacao">Propagação de erros</a>. No gráfico m × V, cada material dá uma reta; o <strong>coeficiente angular é a densidade</strong>. Compare com a literatura: aço ≈ 7,85 g/cm³, alumínio ≈ 2,70 g/cm³.</p></div></article>
+    </div>
+
+    <h3>Lista 6 · Linearização</h3>
+    <div class="ex-list">
+      <article class="ex"><div class="ex-id">1</div><div><p>No monolog os pontos ficam numa reta descendente. Inclinação n = ln(0,4/3,8)/(5,0 − 0,5) ≈ −0,50 → τ = −1/n.</p><p class="ans"><b>τ ≈ 2,0</b> · <b>A ≈ 5</b> (y extrapolado em t = 0) → y ≈ 5·e<sup>−t/2</sup></p></div></article>
+      <article class="ex"><div class="ex-id">2</div><div><p>Faixa de 40 a 79 anos no monolog. Com os extremos: n = ln(499/24)/(79 − 40) = 0,078 por ano.</p><p class="ans"><b>P ≈ 1,0·e<sup>0,078·idade</sup></b> (por 10 mil pessoas). A probabilidade de morte dobra a cada ≈ 9 anos.</p></div></article>
+      <article class="ex"><div class="ex-id">3</div><div><p>No dilog os pontos ficam numa reta. Inclinação com os extremos: log(5,2/0,15)/log(240000/18) ≈ 0,37.</p><p class="ans"><b>r ≈ 0,05·M<sup>0,37</sup></b> (r em nm, M em Da). O expoente é ≈ 1/3: volume ∝ massa, então raio ∝ massa<sup>1/3</sup>.</p></div></article>
+    </div>
+  </section>
+
+  <footer>
+    Baseado nos Roteiros 1 a 6, nas Listas 1 a 6 e na Atividade de Revisão de Laboratório de Física I (Prof. Dr. José Ezequiel de Souza, UFGD, 2026/02). As resoluções são minhas; confira com o que foi feito em sala.
+  </footer>
+</main>
